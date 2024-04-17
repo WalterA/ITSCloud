@@ -40,6 +40,7 @@ famous_person="Albert Einstein"
 citazione="Una persona che non ha mai commesso un errore non ha mai provato nulla di nuovo"
 print(f"{famous_person},\"{citazione}\"")
 
-filename=python_notes.txt
-file=filename.removesuffix()
+filename="python_notes.txt"
+file=filename.removesuffix(".txt")
 print(file)
+
