@@ -1,7 +1,7 @@
 # # l=[0,1,1,2,3,4,5]
 # # for i in range(len(l)):
 # #     print(l[i])
-# d={"pippo":2,"pluto":1,"topolino":5}
+d={"pippo":2,"pluto":1,"topolino":5}
 # # for key in d:
 # #     print(f"Chiave = {key} --> {d[key]}")
 # # keys=list(d.keys())
@@ -33,13 +33,14 @@
 # # for v in values:
 # #      somma += v
 
-# somma=sum (list(d.values()))
+somma=sum (list(d.values()))
 
 
-# d1={"pippo":2,"pluto":1,"topolino":5}
+
+# d={"pippo":2,"pluto":1,"topolino":5}
 # d2={}
 # for v in d1:
-#     d2[v] = d1[v] / somma
+#      d2[v] = d1[v] / somma
 # print(d2)
 
 # for k, v in d.items():
@@ -74,7 +75,7 @@
 #     else:
 #         d["somma_dispari"] += elem
 # print(d)
-i=0
-while i < 5:
-    print(i)
-    i +=1
+# i=0
+# while i < 5:
+#     print(i)
+#     i +=1 
