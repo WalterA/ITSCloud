@@ -77,7 +77,17 @@ persone = [
     {"nome": "Luigi", "cognome": "Verdi", "età": 25, "città": "Milano"},
     {"nome": "Anna", "cognome": "Bianchi", "età": 35, "città": "Napoli"}
 ]
+animali = [
+    {"razza": "pitbull", "taglia": "medio", "età": 10, "proprietario": "Massimo"},
+    {"razza": "pit", "taglia": "piccolo", "età": 16, "proprietario": "Anna"},
+    {"razza": "pitbl", "taglia": "grande", "età": 12, "proprietario": "Gigi"}
+]
 definizioni="Nome proprio di persona"
+numeri_favoriti = {
+    'maria': [42, 17],
+    'michele': [42, 39, 56],
+    'gustavo': [7, 12],
+    }
 
 #3-9
 nomi:list=["pippo","baudo","gianfilippo","gianfranco"]
@@ -87,6 +97,7 @@ nomi:list=["pippo","baudo","gianfilippo","gianfranco"]
 def maiuscola (l:str) -> str:
         x=l.upper()
         return x
+
 def prima_lettera (l:str) -> str:
         x=l.capitalize()
         return x
@@ -153,7 +164,43 @@ def definizione(l:list)->list: #chiedere di inserire un range
 def lista_di_nomi (l:list) -> list:
     lista:list=[]
     for k in l:
-        lista.append(k["name"])
+        lista.append(k["nome"])
+    return lista
+
+def lista_di_cognomi (l:list) -> list:
+    lista:list=[]
+    for k in l:
+        lista.append(k["cognome"])
+    return lista
+
+#variabili per lista_persona
+n:list=lista_di_nomi(persone)
+c:list=lista_di_cognomi(persone)
+
+def lista_persone (n:list,c:list) -> list:
+    lista_uni:list = []
+    if len(n) == len(c):
+        for i in range(len(n)):
+            lista_uni.append(n[i] + " " + c[i])
+        return lista_uni
+    else:
+        print("Le liste devono avere la stessa lunghezza per unirle.")
+
+#6-8
+razza:list=[]
+proprietario:list=[]
+for k in animali:
+    razza.append(k["razza"])
+    proprietario.append(k["proprietario"])
+for i in range(len(razza)):
+    print(f"Il proprietario {proprietario[i]} ha scelto la razza {razza[i]}")
+
+#6.10
+for nome, numeri in numeri_favoriti.items():
+    print("\n" + nome.title() + "I numeri fortunati sono:")
+    for num in numeri:
+        print("  " + str(num))
+
 #2.5
 #print(f"{maiuscola(nome)}, {prima_lettera(frase)}\"ma chissà\"")
 
@@ -173,3 +220,4 @@ def lista_di_nomi (l:list) -> list:
 #print(elenco_diz(persone))
 #nuova_chiave(persone)
 #print(definizione(persone))
+#print(lista_persone(n,c))
