@@ -38,29 +38,31 @@ s: str = "La meccanica quantistica è la teoria fisica che descrive il comportam
     #     questa funzione prende una stringa in input e restituisce una lista costriita nel modo seguente:
     #     -il primo elemento della lista contiene il numero di caratteri nella stringa
     #     -il secondo elemento della lista contiene il numero di parole nella stringa
-    #     -il terzo elemento della lista contiene il numero di parole distinte nella stringa
-    #     -il quarto elemento della lista contene il numero di frasi nella stringa
-    # """
-    # lista=s.split(" ")
-    # print("i parole sono",len(lista))
-    # print("le caratteri sono",len(s))
-    # paroledistinte=set(s.split())
-    # print("le parole distinte sono",len(paroledistinte))
-    # lista=s.split(".")
-    # print("le frasi sono",len(lista))
-#fatta dal prof
+#     #     -il terzo elemento della lista contiene il numero di parole distinte nella stringa
+#     #     -il quarto elemento della lista contene il numero di frasi nella stringa
+#     # """
+#     # lista=s.split(" ")
+#     # print("i parole sono",len(lista))
+#     # print("le caratteri sono",len(s))
+#     # paroledistinte=set(s.split())
+#     # print("le parole distinte sono",len(paroledistinte))
+#     # lista=s.split(".")
+#     # print("le frasi sono",len(lista))
+# #fatta dal prof
 
-def counter(s:str) -> list[int]:
-    res=[]
-    #quanti caratteri ha la stringa
-    res.append=len(s)
-    #quante parole ha la stringa
-    res.append=len(s.split())
-    #quante parole distinte ha la stringa
-    parole=s.splint()
-    parole_distinte=set(parole)
-    res.append=len(parole_distinte)
-    #quanti frasi ha la stringa
-    res.append=len(s.splint(".")) -1  #oppure res[-1]=s.count(".")
-    return res
-counter(s)
+# def counter(s:str) -> list[int]:
+#     res=[]
+#     #quanti caratteri ha la stringa
+#     res.append(len(s))
+#     #quante parole ha la stringa
+#     res.append(len(s.split()))
+#     #quante parole distinte ha la stringa
+#     parole=s.splint()
+#     parole_distinte=set(parole)
+#     res.append(len(parole_distinte))
+#     #quanti frasi ha la stringa
+#     res.append(len(s.splint(".")) -1)  #oppure res[-1]=s.count(".")
+#     return res
+# counter(s)
+
+
