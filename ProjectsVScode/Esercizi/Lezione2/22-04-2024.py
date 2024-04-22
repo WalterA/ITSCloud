@@ -95,23 +95,26 @@
 
 
 
-
+""" RITORNA VERO O FALSO E CONFRONTALA PRIMA CON L'ULTIMA
 s="Amo Roma"
 s1="ciao come stai?"
 def is_palindrome (s:str) -> bool:
-    """
-    restituisce True se è palindoma; altrimenti restituisce False
-    e.s "Amo Roma"è una stringa palindroma
-    e.s. "ciao come stai?"non è una stringa palindroma
-    """
-   
+    # restituisce True se è palindoma; altrimenti restituisce False
+    # e.s "Amo Roma"è una stringa palindroma
+    # e.s. "ciao come stai?"non è una stringa palindroma
     s=s.lower().replace(" ","")
     i:int=0
     while i< len(s) //2:
         j=len(s) - (i+1)
         if s[i] != s[j]:
-                return False 
+                return False
         i+= 1
     return True
 
 print(is_palindrome(s1))
+--------------------------------------------------------------------------"""
+s="ciaomondo"
+l=[]
+i=len(s)- (len(s)+1)
+l.append([i])
+print(l)
