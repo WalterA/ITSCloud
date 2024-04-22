@@ -139,7 +139,14 @@ def numero_di_persone(l:list)->int:
 def nuova_lista ()->list:
     lista=input("inserisci nomi della lista, lasciando uno spazio: ")
     lista=lista.split(" ")
-    return lista
+    lista_numeri=[]
+
+    for i in range(len(lista)):
+        lista_numeri.append(float(lista[i]))
+    print(lista_numeri)
+
+    return lista_numeri
+print(nuova_lista())
 #6-1
 def elenco_diz(l:list)->dict:
     for k in l:
