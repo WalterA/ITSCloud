@@ -69,27 +69,43 @@ you do, print everything you know about each pet.
 # #18/04/2024
 
 #Variabili
-estensione="okok.txt"
-nome:str="Alberto"
-frase:str="è bello"
-nomi:list=["pippo","baudo","gianfilippo","gianfranco","pippo","baudo"]
-macchine:list=["fiat","ferrari","alfa","audi"]
-persone = [
+estensione:str = "okok.txt"
+nome:str = "Alberto"
+frase:str = "è bello"
+nomi:list = ["pippo","baudo","gianfilippo","gianfranco","pippo","baudo"]
+nomi_cognomi:dict = ["pippo","bianchi","baudo","fini","gianfilippo","gianfranco","pippo","baudo"]
+macchine:list = ["fiat","ferrari","alfa","audi"]
+persona1:dict = {"nome": "Mario", "cognome": "Rossi", "età": 30, "città": "Roma"}
+persona2:dict = {"nome": "Luigi", "cognome": "Verdi", "età": 25, "città": "Milano"}
+persone:list[dict] = [
     {"nome": "Mario", "cognome": "Rossi", "età": 30, "città": "Roma"},
     {"nome": "Luigi", "cognome": "Verdi", "età": 25, "città": "Milano"},
     {"nome": "Anna", "cognome": "Bianchi", "età": 35, "città": "Napoli"}
 ]
-animali = [
-    {"razza": "pitbull", "taglia": "medio", "età": 10, "proprietario": "Massimo"},
-    {"razza": "pit", "taglia": "piccolo", "età": 16, "proprietario": "Anna"},
-    {"razza": "pitbl", "taglia": "grande", "età": 12, "proprietario": "Gigi"}
-]
-definizioni="Nome proprio di persona"
-numeri_favoriti = {
-    'maria': [42, 17],
-    'michele': [42, 39, 56],
-    'gustavo': [7, 12],
+animali1:dict = {"razza": "pitbull", "taglia": "medio", "età": 10, "proprietario": "Massimo"}
+animali2:dict = {"razza": "pit", "taglia": "piccolo", "eta": 16, "proprietario": "Anna"}
+definizioni:str = "Nome proprio di persona"
+numeri_f = {
+    'maria': {"eta": 32, "numeri": [42, 17]},
+    'michele': {"eta": 37, "numeri": [42, 39, 56]},
+    'gustavo': {"eta": 75, "numeri": [7, 12]}}
+citta = {
+    'rome': {
+        'country': 'Italy',
+        'population': 2872800,
+        'nearby mountains': 'Alps'
+    },
+    'tokyo': {
+        'country': 'Japan',
+        'population': 13929286,
+        'nearby mountains': 'Kanto'
+    },
+    'new york': {
+        'country': 'United States',
+        'population': 8336817,
+        'nearby mountains': 'none'
     }
+}
 
 #Funzioni
 # *2.3
@@ -111,6 +127,7 @@ def formattazione () -> str:
         print(x)
         x:str=x.title()
         print(x)
+
 # *2.5
 #!print("mi rifiuto")
 # * 2.6
@@ -225,77 +242,57 @@ def nuova_chiave(l:list)->list:
         valore = input("Inserisci numero: ")
         l[i][chiave] = valore
     return l
+# * 6.3
+#!print(f"Il nome è: {persona1["nome"].title()} , il cognome è: {persona1["cognome"].title()}")
+# * 6.7
+def crea_list_da_diz(diz: dict, diz1: dict) -> str:
+    """da due dizionari ho ricavato il valore delle chiavi"""
+    lista:list = []
+    lista.append(diz)
+    lista.append(diz1)
+    for i in lista:
+        nome:str = i["nome"].title() + " " + i["cognome"].title()
+        eta:int = i["età"]
+        citta:str = i["città"].title()
+        print("il nome è:", nome, "ha", eta,"anni", "e vive in:", citta)
+# * 6.8
+def crea_list_dei_valori(diz: dict, diz1: dict) -> str:
+    """da due dizionari ho ricavato il valore delle chiavi"""
+    lista:list = []
+    lista.append(diz)
+    lista.append(diz1)
+    for i in lista:
+        print("la razza del cane:" + i["razza"].title())
+        i.pop("razza")
+        for key, value in i.items():
+            print("\t" + key + ": " + str(value))
+# * 6.9 \ 6.10
+def numeri_favoriti(diz: dict) -> str:
+    for nome, info in diz.items():
+        print(f"\n{nome.title()} - I numeri fortunati sono:")
+        for num in info["numeri"]:
+            print(f"\t- {num}")
+# * 6.11
+def list_da_diversi_diz(diz: dict)->str:
+    for city, city_info in diz.items():
+        country = city_info['country'].title()
+        population = city_info['population']
+        mountains = city_info['nearby mountains'].title()
 
-
-
-
-
-
-
-
-#
-# #6-3
-# def definizione(l:list)->list: #chiedere di inserire un range
-#     for k in l:
-#         print(k["nome"],':'"\n" ,definizioni)
-# #6.7
-# # def lista_di_nomi (l:list) -> list:
-# #     lista:list=[]
-# #     for k in l:
-# #         lista.append(k["nome"])
-# #     return lista
-
-# # def lista_di_cognomi (l:list) -> list:
-# #     lista:list=[]
-# #     for k in l:
-# #         lista.append(k["cognome"])
-# #     return lista
-
-# # #variabili per lista_persona
-# # n:list=lista_di_nomi(persone)
-# # c:list=lista_di_cognomi(persone)
-
-# def lista_persone (n:list,c:list) -> list:
-#     lista_uni:list = []
-#     if len(n) == len(c):
-#         for i in range(len(n)):
-#             lista_uni.append(n[i] + " " + c[i])
-#         return lista_uni
-#     else:
-#         print("Le liste devono avere la stessa lunghezza per unirle.")
-
-# #6-8
-# razza:list=[]
-# proprietario:list=[]
-# # #for k in animali:
-# #     razza.append(k["razza"])
-# #     proprietario.append(k["proprietario"])
-# # for i in range(len(razza)):
-# #     print(f"Il proprietario {proprietario[i]} ha scelto la razza {razza[i]}")
-
-# #6.10
-# # for nome, numeri in numeri_favoriti.items():
-# #     print("\n" + nome.title() + "I numeri fortunati sono:")
-# #     for num in numeri:
-# #         print("  " + str(num))
-
-# #2.5
-# #print(f"{maiuscola(nome)}, {prima_lettera(frase)}\"ma chissà\"")
-
-# #Stampa
-# #print(f"File senza esternzione:",elimina_estensione(estensione)) #->str
-# #print(aggiungi(nomi))
-# #print(elimina(nomi))
-# #print(inserisci(nomi))
-# #print(maiuscola(estensione))
-# #print(prima_lettera(estensione))
-# #print(ordina(nomi))
-# #print(reverse(nomi))
-# #print(ordinas(nomi))
-# #print(numero_di_persone(nomi))
-# #print(nuova_lista())
-# #print(nuova_lista())
-# #print(elenco_diz(persone))
-# #nuova_chiave(persone)
-# #print(definizione(persone))
-# #print(lista_persone(n,c))
+        print("\n" + city.title() + " is in " + country + ".")
+        print("  It has a population of about " + str(population) + ".")
+        print("  The " + mountains + " mountains are nearby.")
+# * 6.12
+def formattazione (x:str) -> str:
+        """Fornisce una stringa:\n
+        caso1=maiuscolo \n
+        caso2=minuscolo \n
+        caso3=solo la prima lettera maiuscola.\n
+        ATTENZIONE chiamare la funzione senza print"""
+        x:str=x.upper()
+        print(x)
+        x:str=x.lower()
+        print(x)
+        x:str=x.title()
+        print(x)
+formattazione("HO FINITO GRAZIE.")
