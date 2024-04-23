@@ -70,7 +70,7 @@ you do, print everything you know about each pet.
 estensione="okok.txt"
 nome:str="Alberto"
 frase:str="è bello"
-nomi:list=["pippo","baudo","gianfilippo","gianfranco"]
+nomi:list=["pippo","baudo","gianfilippo","gianfranco","pippo","baudo"]
 macchine:list=["fiat","ferrari","alfa","audi"]
 persone = [
     {"nome": "Mario", "cognome": "Rossi", "età": 30, "città": "Roma"},
@@ -89,100 +89,117 @@ numeri_favoriti = {
     'gustavo': [7, 12],
     }
 
-#3-9
-nomi:list=["pippo","baudo","gianfilippo","gianfranco"]
-
 #Funzioni
 #2.4
 def maiuscola (l:str) -> str:
+        """Fornisce una stringa con tutti i caratteri maiuscoli."""
         x=l.upper()
         return x
 
 def prima_lettera (l:str) -> str:
+        """Converte solo la prima lettera della stringa in maiuscolo. """
         x=l.capitalize()
         return x
 #2.8
 def elimina_estensione (l:str)->str:
+    """Rimuove l'estensione"""
     rimosso=l.removesuffix(".txt")
     return rimosso
 #3.6-3.7-3.8
 def aggiungi (l:list)->list:
+        """Aggiunge nuove stringe nella lista"""
         l.append(input("Inserisci testo da aggiungere:"))
         return l
 
-def elimina (l:list)->str: #"""CHIEDERE COME INSERIRLO DA INPUT"""
-    eliminati=l.pop(2)
+def elimina (index:int, l:list)->str:
+    """elimina un elemento dalla lista e ritorna l'elemento cancellato"""
+    eliminati=l.pop(index)
     return eliminati
 
-def inserisci (l:list) ->str:
-    l.insert(-1,input("Inserisci testo da aggiungere:"))
+def inserisci (index:int, l:list) ->str:
+    """inserisce in un determinato indice una nuova stringa"""
+    l.insert(index,input("Inserisci testo da aggiungere:"))
     return l
 
 def ordina (l:list) -> list:
+    """mosta la lista dissordinata e ritorna ordinata"""
     print(l)
     lista=sorted(l)
     return lista
-
+#print(f"lista ordinata con sorted{ordina(nomi)}")
 def ordinas (l:list) -> list:
+    """mosta la lista dissordinata e ritorna ordinata"""
     print(l)
     l.sort()
     return l
-
+#print(f"lista ordinata con sort{ordinas(nomi)}")
 def reverse (l:list) ->list:
+    """inverte la lista"""
     print(l)
     l.reverse()
     return (l)
 
 def numero_di_persone(l:list)->int:
-        return len(l)
+        """ritorna il numero degli elementi della lista"""
+        elementi=len(l)
+        return elementi
+#print(numero_di_persone(nomi))
 #3-10
 def nuova_lista ()->list:
+    """crea una nuova lista"""
+    lista=[]
     lista=input("inserisci nomi della lista, lasciando uno spazio: ")
     lista=lista.split(" ")
     lista_numeri=[]
+    for item in lista:
 
-    for i in range(len(lista)):
-        lista_numeri.append(float(lista[i]))
-    print(lista_numeri)
-
+        if type(item) == str:
+            try:
+                lista_numeri.append(float(item))
+            except Exception:
+                lista_numeri.append(item)
     return lista_numeri
-print(nuova_lista())
+
+
 #6-1
-def elenco_diz(l:list)->dict:
-    for k in l:
-        #k=(k)
-        #oppure
-        print("Nome:", k["nome"])
-        # print("Cognome:", k["cognome"])
-        # print("Età:", k["età"])
-        # print("Città:", k["città"])
-    return l
+def elenco_diz(lista_dict: list) -> dict:
+    """legge i valori delle chiavi"""
+    result = {}
+    key:str=input("inserisci key")
+    for dizionario in lista_dict:
+            print(dizionario[key])
+#elenco_diz(persone)
 #6-2
 def nuova_chiave(l:list)->dict:
-    for i in range(len(l)):
-        l[i]["numeri fortunati"] = input("inserisci numero")
-    print(l)
-    return l
+    """inserisce nuove chiavi"""
+    for i in l:
+        lista={}
+        l.append(lista)
+        for k,v in lista:
+            k[lista]= [input("Inserisci nome chiave")]
+            v[lista]= [input("inserisci numero")]
+    return lista
+print(nuova_chiave(persone))
 #6-3
 def definizione(l:list)->list: #chiedere di inserire un range
     for k in l:
         print(k["nome"],':'"\n" ,definizioni)
 #6.7
-def lista_di_nomi (l:list) -> list:
-    lista:list=[]
-    for k in l:
-        lista.append(k["nome"])
-    return lista
+# def lista_di_nomi (l:list) -> list:
+#     lista:list=[]
+#     for k in l:
+#         lista.append(k["nome"])
+#     return lista
 
-def lista_di_cognomi (l:list) -> list:
-    lista:list=[]
-    for k in l:
-        lista.append(k["cognome"])
-    return lista
+# def lista_di_cognomi (l:list) -> list:
+#     lista:list=[]
+#     for k in l:
+#         lista.append(k["cognome"])
+#     return lista
 
-#variabili per lista_persona
-n:list=lista_di_nomi(persone)
-c:list=lista_di_cognomi(persone)
+# #variabili per lista_persona
+# n:list=lista_di_nomi(persone)
+# c:list=lista_di_cognomi(persone)
 
 def lista_persone (n:list,c:list) -> list:
     lista_uni:list = []
@@ -196,17 +213,17 @@ def lista_persone (n:list,c:list) -> list:
 #6-8
 razza:list=[]
 proprietario:list=[]
-for k in animali:
-    razza.append(k["razza"])
-    proprietario.append(k["proprietario"])
-for i in range(len(razza)):
-    print(f"Il proprietario {proprietario[i]} ha scelto la razza {razza[i]}")
+# #for k in animali:
+#     razza.append(k["razza"])
+#     proprietario.append(k["proprietario"])
+# for i in range(len(razza)):
+#     print(f"Il proprietario {proprietario[i]} ha scelto la razza {razza[i]}")
 
 #6.10
-for nome, numeri in numeri_favoriti.items():
-    print("\n" + nome.title() + "I numeri fortunati sono:")
-    for num in numeri:
-        print("  " + str(num))
+# for nome, numeri in numeri_favoriti.items():
+#     print("\n" + nome.title() + "I numeri fortunati sono:")
+#     for num in numeri:
+#         print("  " + str(num))
 
 #2.5
 #print(f"{maiuscola(nome)}, {prima_lettera(frase)}\"ma chissà\"")
@@ -216,8 +233,8 @@ for nome, numeri in numeri_favoriti.items():
 #print(aggiungi(nomi))
 #print(elimina(nomi))
 #print(inserisci(nomi))
-# print(maiuscola(estensione))
-# print(prima_lettera(estensione))
+#print(maiuscola(estensione))
+#print(prima_lettera(estensione))
 #print(ordina(nomi))
 #print(reverse(nomi))
 #print(ordinas(nomi))
