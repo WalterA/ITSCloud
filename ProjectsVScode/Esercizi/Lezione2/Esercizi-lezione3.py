@@ -130,7 +130,7 @@ def frasi(l:list)->list:
     for ogg in l:
         print(ogg)
     for frasi in nuova_lista():
-        print(frasi+ogg)
+        print(frasi+" "+ogg)
 frasi(pizza)
 
    
