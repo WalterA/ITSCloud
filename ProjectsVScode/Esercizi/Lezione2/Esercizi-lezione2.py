@@ -268,12 +268,14 @@ def crea_list_dei_valori(diz: dict, diz1: dict) -> str:
             print("\t" + key + ": " + str(value))
 # * 6.9 \ 6.10
 def numeri_favoriti(diz: dict) -> str:
+    """Prende i valori e li stampa"""
     for nome, info in diz.items():
         print(f"\n{nome.title()} - I numeri fortunati sono:")
         for num in info["numeri"]:
             print(f"\t- {num}")
 # * 6.11
 def list_da_diversi_diz(diz: dict)->str:
+    """Crea liste da un dizionario e le stampa"""
     for city, city_info in diz.items():
         country = city_info['country'].title()
         population = city_info['population']
