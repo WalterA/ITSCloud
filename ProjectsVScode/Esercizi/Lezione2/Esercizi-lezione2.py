@@ -1,3 +1,7 @@
+
+# * Nicola Walter Albano
+# * 18/04/2024
+
 """
 2-3. Personal Message: Use a variable to represent a person’s name, and print a message to that person. Your message should be simple, such as, “Hello Eric, would you like to learn some Python today?”
 2-4. Name Cases: Use a variable to represent a person’s name, and then print that person’s name in lowercase, uppercase, and title case.
@@ -44,8 +48,6 @@ Print the list to show that its order has changed.
 
 3-9. Dinner Guests: Working with one of the programs from Exercises 3, use len() to print a message indicating the number of people you’re inviting to dinner.
 
-3-10. Every Function: Think of things you could store in a list. For example, you could make a list of mountains, rivers, countries, cities, languages, or anything else you’d like. Write a program that creates a list containing these items and then uses each function introduced in this chapter at least once.
-
 6-1. Person: Use a dictionary to store information about a person you know. Store their first name, last name, age, and the city in which they live. You should have keys such as first_name, last_name, age, and city. Print each piece of information stored in your dictionary.
 6-2. Favorite Numbers: Use a dictionary to store people’s favorite numbers. Think of five names, and use them as keys in your dictionary. Think of a favorite number for each person, and store each as a value in your dictionary. Print each person’s name and their favorite number. For even more fun, poll a few friends and get some actual data for your program.
 6-3. Glossary: A Python dictionary can be used to model an actual dictionary. However, to avoid confusion, let’s call it a glossary.
@@ -90,158 +92,210 @@ numeri_favoriti = {
     }
 
 #Funzioni
-#2.4
-def maiuscola (l:str) -> str:
-        """Fornisce una stringa con tutti i caratteri maiuscoli."""
-        x=l.upper()
-        return x
-
-def prima_lettera (l:str) -> str:
-        """Converte solo la prima lettera della stringa in maiuscolo. """
-        x=l.capitalize()
-        return x
-#2.8
+# *2.3
+def stampa_nome () -> str:
+    """Stampa nome inserendolo manualmente dal terminale."""
+    testo:str = input("Inserisci il tuo nome: ")
+    return testo
+# *2.4
+def formattazione () -> str:
+        """Fornisce una stringa:\n
+        caso1=maiuscolo \n
+        caso2=minuscolo \n
+        caso3=solo la prima lettera maiuscola.\n
+        ATTENZIONE chiamare la funzione senza print"""
+        x:str=stampa_nome()
+        x:str=x.upper()
+        print(x)
+        x:str=x.lower()
+        print(x)
+        x:str=x.title()
+        print(x)
+# *2.5
+#!print("mi rifiuto")
+# * 2.6
+#!messaggio:str=f"ti piace caldo? {stampa_nome()}"
+#!print(messaggio)
+# * 2.8
 def elimina_estensione (l:str)->str:
     """Rimuove l'estensione"""
-    rimosso=l.removesuffix(".txt")
+    rimosso:str=l.removesuffix(".txt")
     return rimosso
-#3.6-3.7-3.8
-def aggiungi (l:list)->list:
-        """Aggiunge nuove stringe nella lista"""
-        l.append(input("Inserisci testo da aggiungere:"))
-        return l
-
-def elimina (index:int, l:list)->str:
-    """elimina un elemento dalla lista e ritorna l'elemento cancellato"""
-    eliminati=l.pop(index)
-    return eliminati
-
-def inserisci (index:int, l:list) ->str:
+# * 3.1
+def indice_lista (l:list[str],index:int):
+    """stampa solo l'elemento della lista \n Attenzione: cambiare la funzione
+    in merito se serve solo stampare o solo che la str ritorni"""
+    print(l[index])
+    return l[index]
+#!indice_lista(nomi,2)
+# * 3.2
+#!messaggio:str=f"Sei il migliore {indice_lista(nomi,3)}"
+#!print(messaggio)
+# * 3.3
+def nuova_lista ()->list:
+    """crea una nuova lista"""
+    lista:list=[]
+    lista=input("inserisci nomi della lista, lasciando uno spazio: ")
+    lista=lista.split(" ")
+    lista_mista:list=[]
+    for item in lista:
+        if type(item) == str:
+            try:
+                lista_mista.append(float(item))
+            except Exception:
+                lista_mista.append(item)
+    return lista_mista
+#!for i in  nuova_lista():
+#!    print(f"mi piace {i}")
+# * 3.4
+#!print(f"{indice_lista(nomi,2).title()} è morto")
+# * 3.5
+def elimina_elementi (l:list,index:int) -> str:
+    """stampa l'elemento eliminato + str a scelta"""
+    print(f"sei stato eliminato {indice_lista(l,index).title()}")
+#!elimina_elementi(nomi,2)
+# * 3.6
+def inserisci (index:int, l:list) ->list[str]:
     """inserisce in un determinato indice una nuova stringa"""
     l.insert(index,input("Inserisci testo da aggiungere:"))
     return l
-
-def ordina (l:list) -> list:
-    """mosta la lista dissordinata e ritorna ordinata"""
-    print(l)
-    lista=sorted(l)
-    return lista
-#print(f"lista ordinata con sorted{ordina(nomi)}")
-def ordinas (l:list) -> list:
-    """mosta la lista dissordinata e ritorna ordinata"""
-    print(l)
-    l.sort()
+def inserisci_fine (l:list) ->list[str]:
+    """inserisce in un determinato indice una nuova stringa"""
+    l.append(input("Inserisci testo da aggiungere:"))
     return l
-#print(f"lista ordinata con sort{ordinas(nomi)}")
-def reverse (l:list) ->list:
+# * 3.7
+def elimina_lista (index:int,l:list)->list:
+    "elimina la lista con indice di inizio indicato"
+    del l[index:]
+    print(l)
+def elimina (index:int, l:list)->str:
+    """elimina un elemento dalla lista e ritorna l'elemento cancellato"""
+    eliminati:str=l.pop(index)
+    return eliminati
+def remove (l:list)->list:
+    """elimina delle parole dalla lista"""
+    parola_da_eliminare:str=input("inserire la parola da eliminare o fermati scrivendo \".\"")
+    while parola_da_eliminare != ".":
+        if parola_da_eliminare in l:
+            l.remove(parola_da_eliminare)
+        else:
+            print(f"La parola '{parola_da_eliminare}' non è presente nella lista.")
+        parola_da_eliminare = input("Inserire la parola da eliminare (o '.' per terminare): ")
+    return l
+# * 3.8
+def ordina (l:list) -> list:
+    """ordina lista"""
+    x=sorted(l)
+    return x
+def ordina_al_contrario (l:list) -> list:
+    """ordina la lista al contratio"""
+    x=sorted(l, reverse=True)
+    return x
+def inverti (l:list) ->list:
     """inverte la lista"""
     print(l)
     l.reverse()
     return (l)
-
-def numero_di_persone(l:list)->int:
-        """ritorna il numero degli elementi della lista"""
-        elementi=len(l)
-        return elementi
-#print(numero_di_persone(nomi))
-#3-10
-def nuova_lista ()->list:
-    """crea una nuova lista"""
-    lista=[]
-    lista=input("inserisci nomi della lista, lasciando uno spazio: ")
-    lista=lista.split(" ")
-    lista_numeri=[]
-    for item in lista:
-
-        if type(item) == str:
-            try:
-                lista_numeri.append(float(item))
-            except Exception:
-                lista_numeri.append(item)
-    return lista_numeri
-
-
-#6-1
+def ordina_con_sort (l:list) -> list:
+    """mosta la lista dissordinata e ritorna ordinata"""
+    print(l)
+    l.sort()
+    return l
+def ordina_con_sort_inverti (l:list) -> list:
+    """mosta la lista dissordinata e ritorna ordinata"""
+    print(l)
+    l.sort(reverse=True)
+    return l
+# * 3.9
+def totale_numero_lista (l:list)->list:
+    "Indica quanti elementi ha una lista"
+    x=len(l)
+    return x
+# * 6-1
 def elenco_diz(lista_dict: list) -> dict:
     """legge i valori delle chiavi"""
-    result = {}
-    key:str=input("inserisci key")
+    key:str=input("Inserisci key: ")
     for dizionario in lista_dict:
             print(dizionario[key])
-#elenco_diz(persone)
-#6-2
-def nuova_chiave(l:list)->dict:
+# * 6.2
+def nuova_chiave(l:list)->list:
     """inserisce nuove chiavi"""
-    for i in l:
-        lista={}
-        l.append(lista)
-        for k,v in lista:
-            k[lista]= [input("Inserisci nome chiave")]
-            v[lista]= [input("inserisci numero")]
-    return lista
-print(nuova_chiave(persone))
-#6-3
-def definizione(l:list)->list: #chiedere di inserire un range
-    for k in l:
-        print(k["nome"],':'"\n" ,definizioni)
-#6.7
-# def lista_di_nomi (l:list) -> list:
-#     lista:list=[]
+    for i in range(len(l)):
+        chiave = input("Inserisci nome chiave: ")
+        valore = input("Inserisci numero: ")
+        l[i][chiave] = valore
+    return l
+
+
+
+
+
+
+
+
+#
+# #6-3
+# def definizione(l:list)->list: #chiedere di inserire un range
 #     for k in l:
-#         lista.append(k["nome"])
-#     return lista
+#         print(k["nome"],':'"\n" ,definizioni)
+# #6.7
+# # def lista_di_nomi (l:list) -> list:
+# #     lista:list=[]
+# #     for k in l:
+# #         lista.append(k["nome"])
+# #     return lista
 
-# def lista_di_cognomi (l:list) -> list:
-#     lista:list=[]
-#     for k in l:
-#         lista.append(k["cognome"])
-#     return lista
+# # def lista_di_cognomi (l:list) -> list:
+# #     lista:list=[]
+# #     for k in l:
+# #         lista.append(k["cognome"])
+# #     return lista
 
-# #variabili per lista_persona
-# n:list=lista_di_nomi(persone)
-# c:list=lista_di_cognomi(persone)
+# # #variabili per lista_persona
+# # n:list=lista_di_nomi(persone)
+# # c:list=lista_di_cognomi(persone)
 
-def lista_persone (n:list,c:list) -> list:
-    lista_uni:list = []
-    if len(n) == len(c):
-        for i in range(len(n)):
-            lista_uni.append(n[i] + " " + c[i])
-        return lista_uni
-    else:
-        print("Le liste devono avere la stessa lunghezza per unirle.")
+# def lista_persone (n:list,c:list) -> list:
+#     lista_uni:list = []
+#     if len(n) == len(c):
+#         for i in range(len(n)):
+#             lista_uni.append(n[i] + " " + c[i])
+#         return lista_uni
+#     else:
+#         print("Le liste devono avere la stessa lunghezza per unirle.")
 
-#6-8
-razza:list=[]
-proprietario:list=[]
-# #for k in animali:
-#     razza.append(k["razza"])
-#     proprietario.append(k["proprietario"])
-# for i in range(len(razza)):
-#     print(f"Il proprietario {proprietario[i]} ha scelto la razza {razza[i]}")
+# #6-8
+# razza:list=[]
+# proprietario:list=[]
+# # #for k in animali:
+# #     razza.append(k["razza"])
+# #     proprietario.append(k["proprietario"])
+# # for i in range(len(razza)):
+# #     print(f"Il proprietario {proprietario[i]} ha scelto la razza {razza[i]}")
 
-#6.10
-# for nome, numeri in numeri_favoriti.items():
-#     print("\n" + nome.title() + "I numeri fortunati sono:")
-#     for num in numeri:
-#         print("  " + str(num))
+# #6.10
+# # for nome, numeri in numeri_favoriti.items():
+# #     print("\n" + nome.title() + "I numeri fortunati sono:")
+# #     for num in numeri:
+# #         print("  " + str(num))
 
-#2.5
-#print(f"{maiuscola(nome)}, {prima_lettera(frase)}\"ma chissà\"")
+# #2.5
+# #print(f"{maiuscola(nome)}, {prima_lettera(frase)}\"ma chissà\"")
 
-#Stampa
-#print(f"File senza esternzione:",elimina_estensione(estensione)) #->str
-#print(aggiungi(nomi))
-#print(elimina(nomi))
-#print(inserisci(nomi))
-#print(maiuscola(estensione))
-#print(prima_lettera(estensione))
-#print(ordina(nomi))
-#print(reverse(nomi))
-#print(ordinas(nomi))
-#print(numero_di_persone(nomi))
-#print(nuova_lista())
-#print(nuova_lista())
-#print(elenco_diz(persone))
-#nuova_chiave(persone)
-#print(definizione(persone))
-#print(lista_persone(n,c))
+# #Stampa
+# #print(f"File senza esternzione:",elimina_estensione(estensione)) #->str
+# #print(aggiungi(nomi))
+# #print(elimina(nomi))
+# #print(inserisci(nomi))
+# #print(maiuscola(estensione))
+# #print(prima_lettera(estensione))
+# #print(ordina(nomi))
+# #print(reverse(nomi))
+# #print(ordinas(nomi))
+# #print(numero_di_persone(nomi))
+# #print(nuova_lista())
+# #print(nuova_lista())
+# #print(elenco_diz(persone))
+# #nuova_chiave(persone)
+# #print(definizione(persone))
+# #print(lista_persone(n,c))
