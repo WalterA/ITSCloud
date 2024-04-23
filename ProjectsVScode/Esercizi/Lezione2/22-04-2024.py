@@ -116,5 +116,5 @@ print(is_palindrome(s1))
 s="ciaomondo"
 l=[]
 i=len(s)- (len(s)+1)
-l.append([i])
+l.append(s[i])
 print(l)
