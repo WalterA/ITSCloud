@@ -1,3 +1,6 @@
+#Nicola Walter Albano
+#23/04/2024
+
 """
 4-1. Pizzas: Think of at least three kinds of your favorite pizza. Store these pizza names in a list, and then use a for loop to print the name of each pizza.
 • Modify your for loop to print a sentence using the name of the pizza, instead of printing just the name of the pizza. For each pizza, you should have one line of output containing a simple statement like I like pepperoni pizza.
@@ -110,35 +113,29 @@ than, greater than or equal to, and less than or equal to
 • Use an if-elif-else chain inside the loop to print the proper ordinal ending for each number. Your output should read "1st 2nd 3rd 4th 5th 6th 7th 8th 9th", and each result should be on a separate line.
 """
 
-#4.1
-def nuova_lista ()->list:
-    """crea una nuova lista"""
-    lista=[]
-    lista=input("inserisci nomi della lista, lasciando uno spazio: ")
-    lista=lista.split(" ")
-    lista_numeri=[]
-    for item in lista:
+# * 4.1
+#variabili
+pizza:list[str]=["marg","diav","capri"]
+frasi_list:list[str]=["mi piace"]
+def frasi(p:list, f:list)->str:
+    """unisce due liste di lunghezze diverse"""
+    for o in p:
+        for i in f:
+            lista=i + " " + o
+            print(lista)
+# * 4.2 vedi 4.1
+# * 4.3
+def genera_numeri (index:int)->list:
+    """Genera dei numeri"""
+    my_list:list =[index for index in range(index)]
+    return my_list
 
-        if type(item) == str:
-            try:
-                lista_numeri.append(float(item))
-            except Exception:
-                lista_numeri.append(item)
-    return lista_numeri
-pizza=nuova_lista()
-def frasi(l:list)->list:
-    for ogg in l:
-        print(ogg)
-    for frasi in nuova_lista():
-        print(frasi+" "+ogg)
-frasi(pizza)
-
-   
-
-
-
-
-
+def scansione_lista(index:int,inizio:int,fine:int)->str:
+    """stampa un range di numeri"""
+    genera_numeri(index)
+    for i in range(inizio,fine):
+        print(i)
+# * 4.4
 
 #4-9
 # my_list:list =[index for index in range(100)]
