@@ -121,11 +121,11 @@ def formattazione () -> str:
         caso3=solo la prima lettera maiuscola.\n
         ATTENZIONE chiamare la funzione senza print"""
         x:str=stampa_nome()
-        x:str=x.upper()
+        x:str=x.upper() #caso1
         print(x)
-        x:str=x.lower()
+        x:str=x.lower()#caso2
         print(x)
-        x:str=x.title()
+        x:str=x.title()#caso3
         print(x)
 
 # *2.5

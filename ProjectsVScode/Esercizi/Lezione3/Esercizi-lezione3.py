@@ -129,21 +129,101 @@ def genera_numeri (index:int)->list:
     """Genera dei numeri"""
     my_list:list =[index for index in range(index)]
     return my_list
-
 def scansione_lista(index:int,inizio:int,fine:int)->str:
     """stampa un range di numeri"""
     genera_numeri(index)
     for i in range(inizio,fine):
         print(i)
 # * 4.4
-
-#4-9
+def genera_milione ()->int:
+    """Genera da 1 a un milione"""
+    for index in range(1, 100001):
+        print(index)
+# * 4.5
+def min_max_sum ()->list[int]:
+    """Crea una lista di un milione di numeri e trova il num, max e la somma"""
+    lista_numeri:list = list(range(1,100001))
+    minimo:int=min(lista_numeri) #-> list
+    massimo:int=max(lista_numeri) #-> lista
+    somma:int=sum(lista_numeri) #-> list
+    print(f"La lista dei numeri è:{lista_numeri} \nIl numero più piccolo è:{minimo}\nIl numero più grande è:{massimo}\nLa somma è:{somma}") #-> print int
+# * 4.6
+def dispari ()->int:
+    """Stampa i numeri dispari da 1 a 20"""
+    lista_numeri:list = list(range(1,20))
+    for i in lista_numeri:
+        if i %2 !=0:
+            print(i)
+# * 4.7
+def multipli3 ()->int:
+    """Stampa i numeri multipli di 3 da 3 a 30"""
+    lista_numeri:list = list(range(3,30))
+    for i in lista_numeri:
+        if i %3 ==0:
+            print(i)
+# * 4.8
+def cubi ()->int:
+    """Stampa i numeri cubi da 1 a 11"""
+    cubi:list=[numero**3 for numero in range(1,11)]
+    for cubo in cubi:
+        print(cubo)
+# * 4.9
 # my_list:list =[index for index in range(100)]
 # my_list1:list =[index for index in range(100) if index %2 ==0]
 # my_list2:list =[index if index %2 == 0 else -1 for index in range(100)]
 # my_list3:list =[parola.lower() for parola in my_list]
 # my_dict:dict={"key_1":0, "key_2":1}
 # my_dict2:dict={v:k for k,v in my_dict.items()}
-#print(my_list)
-#print(my_list1)
-#print(my_list2)
+# * 4.10
+elenco_numeri:list=genera_numeri(10)
+def primi3 (lista:list)->int:
+    """Stampa i primi 3 elementi di una lista"""
+    for i in range(3):
+        print(lista[i])
+def centro_elenco (lista:list)->int:
+    """Stampa centro elenco"""
+    centro=len(lista)//2
+    for i in lista[centro-1:centro+2]:
+        print(i)
+def ultimi3 (lista:list)->int:
+    """Stampa le ultime tre elementi di una lista"""
+    for i in lista[-3:]:
+        print(i)
+# * 4.11
+def aggiungi_elemento (lista:list,index:str)->list:
+    """Aggiunge un elemento alla fine di una lista"""
+    lista.append(index)
+    return lista
+def nuova_lista ()->list:
+    """crea una nuova lista"""
+    lista:list=[]
+    lista=input("inserisci nomi della lista, lasciando uno spazio: ")
+    lista=lista.split(" ")
+    lista_mista:list=[]
+    for item in lista:
+        if type(item) == str:
+            try:
+                lista_mista.append(float(item))
+            except Exception:
+                lista_mista.append(item)
+    return lista_mista
+# ! print(f"La lista aggiornata: {aggiungi_elemento(pizza,"funghi")},la nuova lista: {nuova_lista()}")
+# * 4.12
+# ma basta!!!!!!!!!!!!!!!
+# * 5.1
+car="subaru"
+result=car=="subaru"
+result1=car=="audi"
+result2=car=="bmw"
+result3=car=="toyota"
+result4=car=="nissan"
+result5=car=="honda"
+result6=car=="s"
+print(result)
+print(result1)
+print(result2)
+print(result3)
+print(result4)
+print(result5)
+print(result6)
+# * 5.2
