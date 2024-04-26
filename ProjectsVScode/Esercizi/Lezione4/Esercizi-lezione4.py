@@ -36,3 +36,28 @@ import module_name as mn
 from module_name import *
 8-17. Styling Functions: Choose any three programs you wrote for this chapter, and make sure they follow the styling guidelines described in this section.
 """
+# * 8.1 \ 8.8
+def album (artist:str, title:str, tracce:int=None)-> dict:
+    album={"Artista":artist, "Titolo":title}
+    if tracce:
+        album["Tracce"]=tracce
+    return album
+album1:dict=album("Nirvana", "Nevermind", 10)
+album2:dict=album("Michael Jackson", "Thriller", 12)
+album3:dict=album("Pink Floyd", "The Wall", 17)
+
+def descrivi_album() -> dict:
+    while True:
+        artista=input("Artista: \n-quit per uscire \n")
+        if artista == "quit":
+            break
+        titolo = input("Titolo: \n-quit per uscire \n")
+        if titolo == "quit":
+            break
+        tracce = input("Tracce: \n-quit per uscire \n")
+        tracce=int(tracce) if tracce else None
+        if tracce == "quit":
+            break
+        album= album(artista, titolo, tracce)
+        print(album)
+descrivi_album()
