@@ -219,11 +219,131 @@ result3=car=="toyota"
 result4=car=="nissan"
 result5=car=="honda"
 result6=car=="s"
-print(result)
-print(result1)
-print(result2)
-print(result3)
-print(result4)
-print(result5)
-print(result6)
+# !print(result)
+# !print(result1)
+# !print(result2)
+# !print(result3)
+# !print(result4)
+# !print(result5)
+# !print(result6)
 # * 5.2
+def pari_dispari ()->bool:
+    """testa se un numero è pari o dispari"""
+    num:float=float(input("inserisci un numero: "))
+    if num %2 ==0:
+        return True
+    else:
+        return False
+def test_palindromo ()->bool:
+    """testa se una stringa è un palindromo"""
+    stringa:str=input("inserisci una stringa: ")
+    stringa:str=stringa.lower()
+    stringa:str=stringa.replace(" ", "")
+    if stringa == stringa[::-1]:
+        return True
+    else:
+        return False
+def stringa_uguale ()->bool:
+    """restituisce se lunghi uguali"""
+    stringa1:str=input("inserisci prima stringa: ")
+    stringa2:str=input("inserisci seconda stringa: ")
+    if len(stringa1) == len(stringa2):
+        return True
+    else:
+        return False
+# * 5.3 - 5.4 - 5.5 completo rispetto alla traccia dell'esercizio
+def gioco_alieno ()->str:
+    """Gioco alieno"""
+    punti:int=0
+    while punti < 30:
+        alien_color:str=input("Inserisci un colore alieno: ")
+        if alien_color == "verde":
+            punti+=5
+            print("Hai guadagnato 5 punti")
+        elif alien_color == "giallo":
+            punti+=10
+            print("Hai guadagnato 10 punti")
+        elif alien_color == "rosso":
+            punti+=15
+            print("Hai guadagnato 15 punti")
+        else:
+            punti -= 5
+            print("hai perso 5 punti")
+        if punti >= 30:
+            return "Hai vinto"
+    return "Hai perso"
+# * 5.6
+def eta (eta:int)->str:
+    """restituisce l'età di un utente"""
+    if eta <= 2:
+        print ("sei un bambino")
+    elif eta <= 4:
+        print ("sei un bambino piccolo")
+    elif eta <= 13:
+        print ("sei un bambino")
+    elif eta <= 20:
+        print ("sei un adolescente")
+    elif eta <= 65:
+        print ("sei un adulto")
+    else:
+        print ("sei un anziano")
+# * 5.7
+def preferiti (stringa:str,list:list[str])->str:
+    """stampa i preferiti"""
+    if stringa in frutti:
+        return("ti piacciono le mele")
+    if stringa in frutti:
+        return("ti piacciono le pere")
+    if stringa in frutti:
+        return("Ti piacciono le banane")
+    else:
+        print("Elemento non trovato nella lista")
+frutti=["mele", "pere", "banane"]
+# * 5.8 - 5.9
+nomi:list[str]=["admin","user1","user2","user3"]
+nomi1:list[str]=[]
+def saluta_utenti (lista:list[str])->str:
+    """saluta gli utenti"""
+    for utenti in lista:
+        if utenti == "admin":
+            print(f"Hello Adimin, would you like to see a status report?")
+        else:
+            print(f"Hello {utenti}, thank you for logging in again.")
+    else:
+        print("Non ci sono utenti")
+# * 5.10
+def controlla_utente (lista:list[str])->str:
+    """controlla se l'utente è registrato"""
+    lista_min = [item.lower() for item in lista]
+    utente = input("inserisci nome utente: ")
+    utente_min = utente.lower()
+    if utente_min in lista_min:
+        return("utente registrato")
+    else:
+        return("utente non registrato")
+# * 5.11
+def non_so (lista:list[int])->str:
+    """stampa le posizioni dei numeri diversi da zero"""
+    for numeri in lista:
+        if numeri == 0:
+            pass
+        elif numeri == 1:
+            print(f"{numeri}°")
+        elif numeri == 2:
+            print(f"{numeri}°")
+        elif numeri == 3:
+            print(f"{numeri}°")
+        elif numeri == 4:
+            print(f"{numeri}°")
+        elif numeri == 5:
+            print(f"{numeri}°")
+        else:
+            print(f"{numeri}°")
+num=list(range(1,10))
+#non_so(num)
+
+
+
+
+
+
