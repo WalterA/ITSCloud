@@ -46,9 +46,9 @@ album1:dict=album("Nirvana", "Nevermind", 10)
 album2:dict=album("Michael Jackson", "Thriller", 12)
 album3:dict=album("Pink Floyd", "The Wall", 17)
 
-def descrivi_album() -> dict:
+def descrivi_album(album:dict) -> dict:
     while True:
-        artista=input("Artista: \n-quit per uscire \n")
+        artista=input("Artista: \nq-uit per uscire \n")
         if artista == "quit":
             break
         titolo = input("Titolo: \n-quit per uscire \n")
@@ -58,6 +58,5 @@ def descrivi_album() -> dict:
         tracce=int(tracce) if tracce else None
         if tracce == "quit":
             break
-        album= album(artista, titolo, tracce)
-        print(album)
-descrivi_album()
+
+

@@ -1,5 +1,6 @@
-#Nicola Walter Albano
-#23/04/2024
+
+#* Nicola Walter Albano
+#* 23/04/2024
 
 """
 4-1. Pizzas: Think of at least three kinds of your favorite pizza. Store these pizza names in a list, and then use a for loop to print the name of each pizza.
