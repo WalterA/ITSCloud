@@ -38,6 +38,7 @@ from module_name import *
 """
 # * 8.1 \ 8.8
 def album (artist:str, title:str, tracce:int=None)-> dict:
+    "Crea nuovi dizionari"
     album={"Artista":artist, "Titolo":title}
     if tracce:
         album["Tracce"]=tracce
@@ -46,17 +47,81 @@ album1:dict=album("Nirvana", "Nevermind", 10)
 album2:dict=album("Michael Jackson", "Thriller", 12)
 album3:dict=album("Pink Floyd", "The Wall", 17)
 
-def descrivi_album(album:dict) -> dict:
+def descrivi_album() -> dict:
+    """Crea nuovi dizionari"""
+    album_info={}
     while True:
-        artista=input("Artista: \nq-uit per uscire \n")
+        artista=input("Artista: \nquit per uscire \n")
         if artista == "quit":
             break
-        titolo = input("Titolo: \n-quit per uscire \n")
+        titolo = input("Titolo: \nquit per uscire \n")
         if titolo == "quit":
             break
-        tracce = input("Tracce: \n-quit per uscire \n")
-        tracce=int(tracce) if tracce else None
+        tracce = input("Tracce: \nquit per uscire \n")
         if tracce == "quit":
             break
+        elif tracce:
+            tracce=int(tracce)
+        else:
+            tracce=None
+        album_info:dict = {"artista": artista, "titolo": titolo, "tracce": tracce}
+        print(f"Album creato: {album_info}")
+    return album_info
+# * 8.9 \ 8.11
+sms=["ciao","come","stai"]
+inviati_messaggi=[]
+def Messaggi (sms:list, inviati_messaggi:list)->str:
+    """Stampa e invia messaggi"""
+    for mess in sms:
+        print(mess)
+    while sms:
+        inviati=sms.pop(0)
+        print(f"Invio messaggio: {inviati}")
+        inviati_messaggi.append(inviati)
+# * 8.12
+def ordina_panino():
+    """Stampa un riepilogo ingredienti"""
+    ingredienti:list=[]
+    ingredienti=input("inserisci ingredienti, lasciando uno spazio: ")
+    ingredienti=ingredienti.split(" ")
+    print("\n Hai ordinato un panino con i seguenti ingredienti: ")
+    for ingrediente in ingredienti:
+        print(f"- {ingrediente}")
+# * 8.13
+def build_profile(first:str, last:str, **user_info:dict)->dict:
+    """Costuisce un profilo utente in un dizionario"""
+    profile = {}
+    profile["first_name"] = first
+    profile["last_name"] = last
+    for key, value in user_info.items():
+        profile[key] = value
+    return f"{profile['first_name']} {profile['last_name']}, " + ", ".join([f"{k}: {v}" for k, v in user_info.items()])
+# * 8.14
+def make_car (produttore:str, modello:str, **car_info:dict)->dict:
+    """Costuisce un dizionario contenente informazioni sul veicolo"""
+    auto:dict={produttore:produttore, modello:modello}
+    for key, value in car_info.items():
+        auto[key] = value
+    return auto
+car=make_car("subaru", "outback", color="blue", tow_package=True)
+# * 8.15
+from printing_models import funzione1, funzione2
+funzione1("che figooo a saperlo prima non avrei riscritto la metà delle funzioni qui sopra e non solo")
+# * 8.16
+from Esercizi_lezione3 import *
+scansione_lista(5, 0, 10)
+# * 8.17
+"fatto"
+
+
+
+
+
+
+
+
+
+
+
 
 
