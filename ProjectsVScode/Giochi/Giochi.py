@@ -18,7 +18,7 @@ def gioco_indovina_numero()->str:
             print("Troppo alto!")
         if tentativi == tentativi_massimi:
             print(f"Hai perso! Il numero era {numero_segreto}")
-# gioco_indovina_numero()
+#gioco_indovina_numero()
 def gioco_alieno ()->str:
     """Gioco alieno"""
     punti:int=0
@@ -37,5 +37,6 @@ def gioco_alieno ()->str:
             punti -= 5
             print("hai perso 5 punti")
         if punti >= 30:
-            return "Hai vinto"
+            print( "Hai vinto")
     return "Hai perso"
+gioco_alieno()

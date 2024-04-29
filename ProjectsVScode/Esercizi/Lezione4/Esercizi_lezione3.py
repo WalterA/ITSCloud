@@ -271,7 +271,7 @@ def gioco_alieno ()->str:
             punti -= 5
             print("hai perso 5 punti")
         if punti >= 30:
-            return "Hai vinto"
+            print("Hai vinto")
     return "Hai perso"
 # * 5.6
 def eta (eta:int)->str:
