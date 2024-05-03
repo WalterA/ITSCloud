@@ -71,6 +71,18 @@ def third_max(gems:list[int]) -> int:
     else:
         return gems[0]
     
-print(third_max([3,2,1,4]))
+#print(third_max([3,2,1,4]))
+
+def is_subsequence(s:str, t:str)-> bool:
+    if s == "":
+        return True
+    s_pointer=0
+    t_pointer=0
+    while s_pointer < len(s) and t_pointer < len(t):
+        if s[s_pointer] == t[t_pointer]:
+            s_pointer += 1
+        t_pointer += 1
+    return s_pointer == len(s) 
+
 
 
