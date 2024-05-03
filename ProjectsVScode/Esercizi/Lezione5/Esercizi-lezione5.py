@@ -45,7 +45,7 @@ def check_combination(conditionA: bool, conditionB: bool, conditionC: bool) -> s
     
 # print(check_combination(True, False, True))
 
-# numbers: list[int] = [1, 2, 3, 4, 5]
+numbers: list[int] = [1, 2, 3, 4, 5]
 
 for i in numbers:
     print('Number:', i)
