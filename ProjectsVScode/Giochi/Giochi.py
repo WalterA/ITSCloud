@@ -39,4 +39,19 @@ def gioco_alieno ()->str:
         if punti >= 30:
             print( "Hai vinto")
     return "Hai perso"
-gioco_alieno()
+#gioco_alieno()
+
+def tombola() -> str:
+    """Gioco tombola"""
+    lista_nomi = []
+    while True:
+        nome = input("Inserisci un nome (o 'fine' per terminare): ").capitalize()
+        if nome.lower() == "fine":
+            break
+        else:
+            lista_nomi.append(nome)
+
+    print("La lista dei nomi è:", lista_nomi)
+
+
+tombola()

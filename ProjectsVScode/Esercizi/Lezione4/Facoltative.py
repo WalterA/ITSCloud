@@ -88,7 +88,7 @@ def calcola_media_lista (elenco:list)->str:
     """Calcola voto di una lista di studenti"""
     for studente , voto in elenco:
         calcola_media_studenti(studente,voto)
-# print(calcola_media_lista(studenti))
+print(calcola_media_lista(studenti))
 # * 2
 import random
 def gioco_indovina_numero()->str:
