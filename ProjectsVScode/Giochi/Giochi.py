@@ -41,17 +41,53 @@ def gioco_alieno ()->str:
     return "Hai perso"
 #gioco_alieno()
 
+import random
+
+import random
+
 def tombola() -> str:
     """Gioco tombola"""
     lista_nomi = []
+    dizionario_tombola = {}
+    cartella_master = set()
+    for _ in range(15):
+        cartella_master.add(random.randint(1, 91))
+    print("La cartella master è:", cartella_master)
     while True:
         nome = input("Inserisci un nome (o 'fine' per terminare): ").capitalize()
         if nome.lower() == "fine":
             break
         else:
             lista_nomi.append(nome)
+    print ("La lista dei giocatori è:", lista_nomi)
 
-    print("La lista dei nomi è:", lista_nomi)
+    for nome in lista_nomi:
+        numeri = set()
+        for _ in range(15):
+            numeri.add(random.randint(1, 91))
+        dizionario_tombola[nome] = numeri
+
+    print("Il dizionario della tombola è:\n", dizionario_tombola, "\n")
+
+    for k, v in dizionario_tombola.items():
+        numeri_vincenti = v.intersection(cartella_master)
+        if numeri_vincenti == cartella_master:
+            print(f"Giocatore {k} ha vinto la tombola!")
+        elif len(numeri_vincenti) == 1:
+            print(f"Giocatore {k} hai solo un numero")
+        elif len(numeri_vincenti) == 2:
+            print(f"Giocatore {k} hai fatto ambo!")
+        elif len(numeri_vincenti) == 3:
+            print(f"Giocatore {k} hai fatto terno!")
+        elif len(numeri_vincenti) == 4:
+            print(f"Giocatore {k} hai fatto quaterno!")
+        elif len(numeri_vincenti) == 5:
+            print(f"Giocatore {k} hai fatto !")
+        else:
+            print(f"Giocatore {k} tombola!")
 
 
 tombola()
+
+
+
