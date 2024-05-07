@@ -43,8 +43,6 @@ def gioco_alieno ()->str:
 
 import random
 
-import random
-
 def tombola() -> str:
     """Gioco tombola"""
     lista_nomi = []
@@ -71,6 +69,7 @@ def tombola() -> str:
 
     for k, v in dizionario_tombola.items():
         numeri_vincenti = v.intersection(cartella_master)
+        while.....
         if numeri_vincenti == cartella_master:
             print(f"Giocatore {k} ha vinto la tombola!")
         elif len(numeri_vincenti) == 1:
