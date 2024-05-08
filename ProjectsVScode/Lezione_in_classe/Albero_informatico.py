@@ -23,7 +23,7 @@ def visit_tree(tree, node):
         visit_tree(tree, right_child)
 
 tree={4:[3,5],3:[2,None],5:[4.5,6]}
-#print(visit_tree(tree,4))
+print(visit_tree(tree,4))
 
 def visit_tree_interative(tree, root):
     stack=[root]
