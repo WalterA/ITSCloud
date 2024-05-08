@@ -35,7 +35,10 @@ class ZooKeeper:
         self.id: float = id
 
     def add_animal(animal: Animal, fence: Fence):
+        lista=[]
         if animal not in fence:
+            lista.append()
+
 
 
 
