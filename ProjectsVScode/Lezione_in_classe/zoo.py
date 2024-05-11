@@ -26,11 +26,11 @@ class Animal:
         assert isinstance(preferred_habitat, str), "preferred_habitat deve essere una stringa"
         self.name = name.capitalize()
         self.species = species
-        self.age = age
-        self.height = height
-        self.width = width
+        self.age = round(age, 2)
+        self.height = round(height, 2)
+        self.width = round(width, 2)
         self.preferred_habitat = preferred_habitat
-        self.health = round(100 * (1 / self.age), 3)
+        self.health = round(100 * (1 / self.age), 2)
 
     def __str__(self):
         return f"Animal(name={self.name}, species={self.species}, age={self.age})"
@@ -40,8 +40,8 @@ class Fence:
         assert isinstance(area, (float, int)), "area deve essere un float o intero"
         assert isinstance(temperature, (float, int)), "temperature deve essere un float o intero"
         assert isinstance(habitat, str), "habitat deve essere una stringa"
-        self.area = area
-        self.temperature = temperature
+        self.area = round(area, 2)
+        self.temperature = round(temperature, 2)
         self.habitat = habitat
         self.animals = []
 
@@ -52,7 +52,7 @@ class ZooKeeper:
     def __init__(self, name:str, surname:str, id:float):
         assert isinstance(name, str), "name deve essere una stringa"
         assert isinstance(surname, str), "surname deve essere una stringa"
-        assert isinstance(id, (float, int)), "id deve essere un float o intero"
+        assert isinstance(id, int), "id deve essere un intero"
         self.name = name.capitalize()
         self.surname = surname.capitalize()
         self.id = id
@@ -67,7 +67,7 @@ class ZooKeeper:
                 return
         if animal.preferred_habitat == fence.habitat and animal.height * animal.width <= fence.area:
             fence.animals.append(animal)
-            fence.area -= animal.height * animal.width
+            fence.area = round(fence.area - animal.height * animal.width, 2)
         else:
             print("Non è possibile aggiungere l'animale al recinto. Non c'è abbastanza spazio.")
 
@@ -75,38 +75,86 @@ class ZooKeeper:
         if animal in fence.animals:
             fence.animals.remove(animal)
             fence.area += animal.height * animal.width
-
-    def feed(self, animal: Animal, fence: Fence):
-        if animal in fence.animals and animal.height * animal.width * 1.02 <= fence.area:
-            animal.health = min(animal.health * 1.01, 100)
-            animal.height *= 1.02
-            animal.width *= 1.02
-            fence.area -= animal.height * animal.width * 0.02
         else:
-            print("Non è possibile nutrire l'animale.")
+            print(f"L'animale {animal.name} non si trova nel recinto specificato.")
+
+
+    def feed(self, fence: Fence):
+        for animal in fence.animals:
+            if round(animal.height * animal.width * 1.02, 2) <= fence.area:
+                animal.health = min(round(animal.health * 1.01, 2), 100)
+                animal.height = round(animal.height * 1.02, 2)
+                animal.width = round(animal.width * 1.02, 2)
+                fence.area = round(fence.area - animal.height * animal.width * 0.02, 2)
+            else:
+                print(f"Non è possibile nutrire uno degli animali. Non c'è abbastanza spazio nel recinto.")
+
 
     def clean(self, fence: Fence):
         occupied_area = sum([animal.height * animal.width for animal in fence.animals])
-        return occupied_area / (fence.area + occupied_area) if fence.area > 0 else occupied_area
-    
+        return round((1 - occupied_area / (fence.area + occupied_area)) * 100, 2) if fence.area > 0 else 0
 
-        
+# Creazione di alcuni animali
+animale1 = Animal(name="Leo", species="Leone", age=5, height=1.2, width=2.0, preferred_habitat="Savana")
+animale2 = Animal(name="Tigro", species="Tigre", age=4, height=7.9, width=8.8, preferred_habitat="Giungla")
+animale3 = Animal(name="fa", species="Tigre", age=4, height=5.9, width=9.8, preferred_habitat="Giungla")
+animale4 = Animal(name="ge", species="Tigre", age=4, height=10.9, width=1.8, preferred_habitat="Giungla")
+animale5 = Animal(name="re", species="Serpente", age=10, height=0.9, width=1.8, preferred_habitat="Deserto")
 
-#da cancellare
-animale1 =Animal(name="ok" , species="tigre", age=10, height=2.5, width=3, preferred_habitat="foresta")
-#animale2 =Animal(name="Filippo" , species="tigre", age=10, height=2.5, width=3.3, preferred_habitat="foresta")
-#animale3 =Animal(name="Filippo" , species="serpente", age=4, height=3.4, width=6.4, preferred_habitat="foresta")
-#animale4 =Animal(name="Pippo" , species="cane", age=5, height=1.5, width=2.6, preferred_habitat="bosco")
-print(animale1.name)
-# guardiano1 =ZooKeeper(name="gianfranco", surname="rossi", id=125)
-# guardiano2 =ZooKeeper(name="fabio", surname="bianco", id=155)
-# guardiano3 =ZooKeeper(name="gianni", surname="alb", id=455)
-fence1=Fence(area=10, temperature=30, habitat="foresta")
-print(fence1.area)
-# fence2=Fence(area=50, temperature=30, habitat="deserto")
-# fence3=Fence(area=10, temperature=30, habitat="bosco")
-# guardiano = ZooKeeper(name="gianfranco", surname="rossi", id=125)  # Crea un'istanza di ZooKeeper
-# guardiano.add_animal(animale1, fence1)  # Usa il metodo add_animal su quell'istanza
-# guardiano.add_animal(animale2,fence1)  #
-# guardiano.add_animal(animale3,fence1)
-# print(animale1.health)
+# Creazione di un recinto
+recinto1 = Fence(area=20.0, temperature=24.0, habitat="Savana")
+recinto2 = Fence(area=10.0, temperature=24.0, habitat="Foresta")
+recinto3 = Fence(area=50.0, temperature=24.0, habitat="Deserto")
+recinto4 = Fence(area=100.0, temperature=24.0, habitat="Giungla")
+
+# Creazione di un guardiano dello zoo
+guardiano1 = ZooKeeper(name="Mario", surname="Rossi", id=1)
+guardiano2 = ZooKeeper(name="Sergio", surname="Rossi", id=12)
+guardiano3 = ZooKeeper(name="Franco", surname="Rossi", id=13)
+
+# Il guardiano aggiunge gli animali al recinto
+guardiano1.add_animal(animale1, recinto1)
+guardiano2.add_animal(animale2, recinto4)
+guardiano3.add_animal(animale3, recinto4)
+guardiano1.add_animal(animale4, recinto4)
+guardiano2.add_animal(animale5, recinto3)
+# Creazione dello zoo
+zoo = Zoo(fences=[recinto1, recinto2, recinto3,recinto4], zoo_keepers=[guardiano1,guardiano2,guardiano3])
+
+# Descrizione dello zoo
+zoo.describe_zoo()
+
+# Il guardiano nutre gli animali
+guardiano1.feed(recinto1)
+guardiano2.feed(recinto1)
+guardiano3.feed(recinto1)
+guardiano2.feed(recinto2)
+guardiano3.feed(recinto2)
+guardiano2.feed(recinto2)
+guardiano3.feed(recinto3)
+guardiano1.feed(recinto3)
+guardiano1.feed(recinto3)
+guardiano2.feed(recinto4)
+guardiano3.feed(recinto4)
+guardiano1.feed(recinto4)
+guardiano1.feed(recinto4)
+
+print(recinto1.area)
+print(recinto2.area)
+print(recinto3.area)
+print(recinto4.area)
+
+# Pulizia del recinto
+pulizia = guardiano1.clean(recinto1)
+print(f"Percentuale di area occupata nel recinto: {pulizia}")
+pulizia2 = guardiano1.clean(recinto2)
+print(f"Percentuale di area occupata nel recinto: {pulizia2}")
+pulizia3 = guardiano1.clean(recinto3)
+print(f"Percentuale di area occupata nel recinto: {pulizia3}")
+pulizia4 = guardiano1.clean(recinto4)
+print(f"Percentuale di area occupata nel recinto: {pulizia4}")
+rimuovi=guardiano1.remove_animal(animale1, recinto1)
+rimuovi=guardiano1.remove_animal(animale1, recinto1)
+rimuovi=guardiano1.remove_animal(animale3, recinto4)
+rimuovi=guardiano1.remove_animal(animale5, recinto4)
+zoo.describe_zoo()
