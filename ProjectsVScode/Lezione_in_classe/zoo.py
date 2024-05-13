@@ -103,18 +103,24 @@ class ZooKeeper:
         else:
             print(f"L'animale {animal.name} non si trova nel recinto specificato.")
 
-    def feed(self, fence: Fence):
-        """Metodo per nutrire gli animali in un recinto"""
-        for animal in fence.animals:
-            # Verifica se c'è abbastanza spazio nel recinto per l'animale dopo essere stato nutrito
-            if round(animal.height * animal.width * 1.02, 2) <= fence.area:
-                # Aumenta la salute dell'animale, le sue dimensioni e riduce l'area del recinto
-                animal.health = min(round(animal.health * 1.01, 2), 100)
-                animal.height = round(animal.height * 1.02, 2)
-                animal.width = round(animal.width * 1.02, 2)
-                fence.area = round(fence.area - animal.height * animal.width * 0.02, 2)
-            else:
-                print(f"Non è possibile nutrire uno degli animali. Non c'è abbastanza spazio nel recinto.")
+    def feed(self, animal: Animal):
+        """Metodo per nutrire un animale"""
+        # Calcola le nuove dimensioni dell'animale dopo essere stato nutrito
+        new_height = animal.height * 1.02
+        new_width = animal.width * 1.02
+        # Verifica se l'animale si trova in un recinto con abbastanza spazio
+        for fence in self.fences:
+            if animal in fence.animals and new_height * new_width <= fence.area:
+                # Aumenta la salute dell'animale del 1%
+                animal.health = min(animal.health * 1.01, 100)
+                # Aumenta le dimensioni dell'animale del 2%
+                animal.height = new_height
+                animal.width = new_width
+                # Riduce l'area del recinto
+                fence.area -= new_height * new_width - animal.height * animal.width
+                return
+        print(f"Non è possibile nutrire l'animale {animal.name}. Non c'è abbastanza spazio nel recinto.")
+
 
     def clean(self, fence: Fence):
         """Metodo per pulire un recinto"""
@@ -123,3 +129,36 @@ class ZooKeeper:
         # Restituisce la percentuale di area occupata nel recinto
         cleaning_time = occupied_area / (fence.area + occupied_area) if fence.area > 0 else occupied_area
         return round(cleaning_time, 2)
+
+# Creazione di un animale
+animal = Animal("Leo", "Lion", 5, 1.2, 0.5, "Savannah")
+print(animal)  # Stampa: Animal(name=Leo, species=Lion, age=5)
+
+# Creazione di un recinto
+fence = Fence(100.0, 25.0, "Savannah")
+print(fence)  # Stampa: Fence(area=100.0, temperature=25.0, habitat=Savannah)
+
+# Creazione di un guardiano dello zoo
+zoo_keeper = ZooKeeper("Mario", "Rossi", 1)
+print(zoo_keeper)  # Stampa: ZooKeeper(name=Mario, surname=Rossi, id=1)
+
+# Aggiunta dell'animale al recinto
+zoo_keeper.add_animal(animal, fence)
+# Non stampa nulla, ma l'animale viene aggiunto al recinto
+
+# Rimozione dell'animale dal recinto
+zoo_keeper.remove_animal(animal, fence)
+# Non stampa nulla, ma l'animale viene rimosso dal recinto
+
+# Nutrizione dell'animale
+zoo_keeper.feed(animal)
+# Non stampa nulla, ma la salute e le dimensioni dell'animale vengono aumentate
+
+# Pulizia del recinto
+cleaning_time = zoo_keeper.clean(fence)
+print(cleaning_time)  # Stampa il tempo di pulizia del recinto
+
+# Creazione dello zoo
+zoo = Zoo([fence], [zoo_keeper])
+zoo.describe_zoo()  # Stampa i dettagli dei guardiani e dei recinti dello zoo
+
