@@ -7,9 +7,9 @@ class Animal(ABC):
         self.name: str = name
         self.age:int = age
         
-@abstractmethod
-def verso():
-    pass
+    @abstractmethod
+    def verso(self):
+        pass
 
 class Cat(Animal):
     def __init__(self, name: str, age: int) -> None:
