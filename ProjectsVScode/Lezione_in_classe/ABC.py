@@ -27,3 +27,4 @@ class Dog(Animal):
         
 cane1: Dog = Dog(name="davide", age=3)
 cane1.verso()
+dasdasdsaasdasd
