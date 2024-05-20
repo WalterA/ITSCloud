@@ -9,40 +9,69 @@
         borrow()-Contrassegna il libro come preso in prestito se non è già preso in prestito.
         return_book()- Contrassegna il libro come restituito."""
 class Book:
-    def __init__(self, book_id:str,title:str,author:str,is_borrowed:bool) -> None:
+    def __init__(self, book_id: str, title: str, author: str, is_borrowed: bool = False):
         self.book_id = book_id
         self.title = title
         self.author = author
-        self.is_borrowed = True
+        self.is_borrowed = is_borrowed
 
     def borrow(self):
-        if self.is_borrowed:
-            self.is_borrowed = False
+        if not self.is_borrowed:
+            self.is_borrowed = True
+            return True
         else:
-            return print("Libro in prestito")
+            return False
+
     def return_book(self):
         if self.is_borrowed:
-            return print("gia consegnato")
+            self.is_borrowed = False
+            return True
         else:
-            self.is_borrowed = True
-            return print("consegnato")
+            return False
 
+
+
+
+"""
+Classe Member:
+
+Attributi:
+member_id: str - identificativo del membro.
+name: str - il nome del membro.
+borrowed_books: list[Book] - lista dei libri presi in prestito.
+Metodi:
+borrow_book(book): aggiunge il libro nella lista borrowed_books se non è già stato preso in prestito.
+return_book(book): rimuove il libro dalla lista borrowed_books.
+"""
 class Member:
-    def __init__(self,
-                 member_id: str,
-                 name: str,
-                 borrowed_books: list[Book]) -> None:
+    def __init__(self, member_id: str, name: str):
         self.member_id = member_id
         self.name = name
-        
-        
-                
-        
+        self.borrowed_books = []
+
+    def borrow_book(self, book: Book):
+        if not book.is_borrowed and book.borrow():
+            self.borrowed_books.append(book)
+            return True
+        else:
+            return False
+
+    def return_book(self, book: Book):
+        if book in self.borrowed_books and book.return_book():
+            self.borrowed_books.remove(book)
+            return True and print("aggiunto")
+        else:
+            return False and print("go")
+    
+
 libro = Book("gig","il pallone","biaggio",True)
-libro.borrow()
-libro.borrow()
-libro.borrow()
-libro.return_book()
-libro.return_book()
-libro.return_book()
+# libro.borrow()
+# libro.borrow()
+# libro.borrow()
+# libro.return_book()
+# libro.return_book()
+# libro.return_book()
+user1 = Member("1","mario")
+user1.borrow_book(libro)
+user1.borrow_book(libro)
 
