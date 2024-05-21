@@ -18,18 +18,12 @@ class Book:
     def borrow(self):
         if not self.is_borrowed:
             self.is_borrowed = True
-            return True
-        else:
-            return False
+         
 
     def return_book(self):
         if self.is_borrowed:
             self.is_borrowed = False
-            return True
-        else:
-            return False
-
-
+            
 
 
 """
@@ -47,17 +41,19 @@ class Member:
     def __init__(self, member_id: str, name: str):
         self.member_id = member_id
         self.name = name
-        self.borrowed_books = []
+        self.borrowed_books: list[Book] = []
 
     def borrow_book(self, book: Book):
-        if not book.is_borrowed and book.borrow():
+        if not book.is_borrowed:
+            book.borrow()
             self.borrowed_books.append(book)
             return True
         else:
             return False
 
     def return_book(self, book: Book):
-        if book in self.borrowed_books and book.return_book():
+        if book.is_borrowed and book in self.borrowed_books:
+            book.return_book()
             self.borrowed_books.remove(book)
             return True and print("aggiunto")
         else:
