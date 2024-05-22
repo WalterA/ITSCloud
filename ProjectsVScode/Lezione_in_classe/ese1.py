@@ -1,7 +1,7 @@
-x = 0
-y= 5
+x = 5
+y= 0
 
-ok = (x < 5 and y > x)
+ok = x < 5 and y > x
 print(ok)
 
 """
@@ -182,7 +182,7 @@ def rimbalzo() -> None:
     while rimbalzi <5:
         altezza = altezza + velocita
         velocita = velocita - 96
-           
+            
         if altezza<0:
             altezza *= -0.5 
             velocita *= -0.5 
