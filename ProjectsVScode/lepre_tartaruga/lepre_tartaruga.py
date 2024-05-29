@@ -125,14 +125,14 @@ def visualizzare_posizioni(conta_lepre:int, conta_tartaruga:int):
     print(''.join(corsia))  # Stampa la pista
 
 
-def loop():
+def loop() -> None:
     print("'BANG !!!!! AND THEY'RE OFF !!!!!'")  # Messaggio di inizio gara
     conta_lepre = 0  # Inizializza la posizione della lepre a 0 (partenza)
     conta_tartaruga = 0  # Inizializza la posizione della tartaruga a 0 (partenza)
     tick = 0  # Contatore per tenere traccia del numero di turni
     energia_lepre = 100  # Inizializza l'energia della lepre a 100
     energia_tartaruga = 100  # Inizializza l'energia della tartaruga a 100
-    meteo:str = ''
+    meteo: str = ""
     while conta_lepre < 70 and conta_tartaruga < 70:  # Finchè nessuno dei due arriva al quadrato 70
         if tick % 10 == 0:  # Ogni 10 turni
             meteo = random.choice(['sole', 'pioggia'])  # Scegli casualmente il meteo (sole o pioggia)
