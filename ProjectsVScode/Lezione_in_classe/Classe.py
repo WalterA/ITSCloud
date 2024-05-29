@@ -32,7 +32,7 @@ class Coccodrillo(abcAnimal):
         print("Miao!")
 
 from typing import Any
-from typing import TypeAlias
+from typing import TypeAlias    
 tipoComposto: TypeAlias = dict[int,int]
 
 a:dict[str,str | int] = {"key":"val_1","key_3":3} # OR LOGICO |        
