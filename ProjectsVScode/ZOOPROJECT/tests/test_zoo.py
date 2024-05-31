@@ -18,12 +18,23 @@ class testZoo(TestCase):
         
     def test_1(self):
         """controlla che animale troppo grandi non vengono aggiunti alla fence"""
-        self.ZooKeeper_1.add_animal(self.animal_1,self.fence_1)
-        result: int = len(self.fence_1.animals)
+        
+        
+        ZooKeeper_1: ZooKeeper = ZooKeeper("Mario","Rossi","123")
+        fence_1: Fence = Fence(10000,10.5,"Forest")
+        animal_1: Animal = Animal("Bob","Cane",23,10.2,5.3,"Forest")
+        ZooKeeper_1.add_animal(animal_1,self.fence_1)
+        result: int = len(fence_1.animals)
         message:str = f"Error: the "
         
         self.assertEqual(result,0,message)
         
-    
+    def test_2(self):
+        self.ZooKeeper_1.remove_animal(self.animal_1,self.fence_1)
+        result: int = len(self.fence_1.animals)    
+        message:str = f"piena"
+        
+        self.assertAlmostEqual(result, 0 , message)
+        
     if __name__ == "__main__":
         unittest.main()
