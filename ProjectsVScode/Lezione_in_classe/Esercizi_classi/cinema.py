@@ -82,3 +82,8 @@ meraviglia.aggiungi_sala(sala)
 meraviglia.aggiungi_sala(sala2)
 
 print(meraviglia.prenota_film("gigi", 5))
+print(meraviglia.prenota_film("BOBO", 5))
+print(meraviglia.prenota_film("gigi", 5))
+print(meraviglia.prenota_film("gigi", 5))
+print(meraviglia.prenota_film("Corte", 5))
+print(meraviglia.prenota_film("gigi", 5))
