@@ -36,5 +36,13 @@ class testZoo(TestCase):
         
         self.assertAlmostEqual(result, 0 , message)
         
+    def test_3(self):
+        self.ZooKeeper_1.feed(self.animal_1)
+        result = True
+        if self.animal_1.health != 100:
+            result = True
+            return result
+        self.assertAlmostEqual(result)
+        
     if __name__ == "__main__":
         unittest.main()
