@@ -23,18 +23,21 @@ class Magazzino:
         self.magazzino.append(prodotto)
         return
     
-    def cerca_prodotto(self,nome: str)-> str:
+    def cerca_prodotto(self,nome: str):
         for prodotto in self.magazzino:
             if prodotto.nome == nome:
                 return nome
             
-    def verifica_disponibilità(self,nome: str) -> str:
+    def verifica_disponibilità(self,nome: str):
         if self.cerca_prodotto(nome) == nome:
             return f"Il prodotto: {nome} è disponibile"
+        else:
+            return f"non disponibile il seguente prodotoo: {nome}"
         
 gomme = Prodotto("bmv", 5)
-Magazzino.aggiungi_prodotto(gomme)
-Magazzin.cerca_prodotto()
+ugo= Magazzino()
+ugo.aggiungi_prodotto(gomme)
+print(ugo.verifica_disponibilità("bmv"))
     
         
     
