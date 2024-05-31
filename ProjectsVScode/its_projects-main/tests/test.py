@@ -1,5 +1,5 @@
 import unittest
-from calc import Calculations
+from ...src.calc import Calculations
 
 
 class TestCalc(unittest.TestCase):
