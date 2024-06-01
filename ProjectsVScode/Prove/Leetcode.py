@@ -29,3 +29,7 @@ def removeDuplicates(nums: list[int]) -> int: #quanti duplicati ci sono
 n=[2,2,2,2,5,6,7]
 print(removeDuplicates(n))-----------------------------------------------------------------------------------------------------
 """
+
+dizionario = {'a': 1, 'b': 2, 'c': 3, 'd': 2}
+dizionario['b'].
+print(dizionario)
