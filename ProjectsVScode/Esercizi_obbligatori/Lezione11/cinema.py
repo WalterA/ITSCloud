@@ -21,17 +21,19 @@ Test case:
 
 """
 class Film:
+
     def __init__(self,titolo:str,durata:float) -> None:
         self.titolo:str = titolo
         self.durata:float = durata
-    
+
 class Sala:
+
     def __init__(self,id:int,film:Film,posti_tot:int) -> None:
         self.id:int = id
         self.film:Film = film
         self.posti_tot:int = posti_tot
         self.posti_prenotati:int = 0
-        
+
     def prenota_posti(self,posti_prenotati:int) -> str:
         """Prenota un certo numero di posti nella sala, se disponibili. Restituisce un messaggio di conferma o di errore."""
         if self.posti_tot > posti_prenotati:
@@ -39,28 +41,26 @@ class Sala:
             return f"Posti prenotati sono:{posti_prenotati}"
         else:
             return "Non ci sono posti disponibili"
-                
-            
-            
-            
+
     def posti_disponibili(self)->str:
         """Restituisce il numero di posti ancora disponibili nella sala."""
-        return f"Posti disponibili sono:{self.posti_tot}"      
-            
-        
+        return f"Posti disponibili sono:{self.posti_tot}"
+
 class Cinema:
+
     """- aggiungi_sala(sala): Aggiunge una nuova sala al cinema.
-    - prenota_film(titolo_film, num_posti): Trova il film desiderato e tenta di prenotare posti. Restituisce un messaggio di stato."""
-    
+    - prenota_film(titolo_film, num_posti): Trova il film desiderato e tenta di prenotare posti.
+    Restituisce un messaggio di stato.
+    """
+
     def __init__(self) -> None:
         self.tutte_sale:list[Sala] = []
-        
-        
+
+
     def aggiungi_sala (self,sala: Sala)->None:
         self.tutte_sale.append(sala)
         return
-    
-    
+
     def prenota_film(self, titolo_film: str, num_posti: int) -> str:
         for elem in self.tutte_sale:
             if elem.film.titolo == titolo_film:
@@ -68,9 +68,7 @@ class Cinema:
                 return "Posti prenotati"
         return f"Film {titolo_film} non trovato"
 
-                   
-            
-    
+"""_____________________Print________________________________"""
 film:Film = Film("Corte",3.40)
 film2:Film = Film("BOBO",3.43)
 sala:Sala = Sala(12353253,film,40)

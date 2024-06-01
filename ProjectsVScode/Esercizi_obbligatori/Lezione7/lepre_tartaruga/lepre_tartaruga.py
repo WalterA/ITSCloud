@@ -1,4 +1,5 @@
-import random  # Importa il modulo random per generare numeri casuali
+import random
+import unittest  # Importa il modulo random per generare numeri casuali
 
 def dado():
     return random.randint(1, 10)  # Restituisce un numero casuale compreso tra 1 e 10
@@ -172,5 +173,7 @@ def loop() -> None:
     elif conta_tartaruga >= 70:  # Se la tartaruga ha completato la gara
         print("TORTOISE WINS! || VAY!!!")  # Stampa che la tartaruga ha vinto
 
+# if __name__ == "__main__":
+#     unittest.main()
 
-loop()  # Esegui la funzione di loop per avviare la gara
+# loop()  # Esegui la funzione di loop per avviare la gara
