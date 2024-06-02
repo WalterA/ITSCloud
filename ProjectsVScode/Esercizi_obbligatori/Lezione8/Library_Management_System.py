@@ -81,45 +81,48 @@ class Library:
 
         return f"La biblioteca contiene {self.total_books} libri e {len(self.members)} membri.\nCatalogo libri:\n{elenco}\nLista membri:\n{elenco_m}\n"
 
-# Define the Book, Member, and Library classes here
+    @classmethod
+    def library_statistics(cls, library_instance):
+        print(f"Total number of books in the library: {library_instance.total_books}")
 
-# Create instances of books using class methods
-book1 = Book.from_string("1984, George Orwell, 9780451524935")
-book2 = Book.from_string("Il Signore degli Anelli, J.R.R. Tolkien, 9780618640157")
-book3 = Book.from_string("Il Piccolo Principe, Antoine de Saint-Exupéry, 9780156013987")
 
-# Create instances of members using class methods
-member1 = Member.from_string("Mario Rossi, M001")
-member2 = Member.from_string("Luigi Bianchi, M002")
 
-# Create a library
+# Creazione di alcune istanze di libri
+book1 = Book("Il Signore degli Anelli", "J.R.R. Tolkien", "9788804483347")
+book2 = Book("Harry Potter e la pietra filosofale", "J.K. Rowling", "9780747532743")
+book3 = Book.from_string("1984, George Orwell, 9780451524935")
+
+# Creazione di alcune istanze di membri
+member1 = Member("Alice", "001")
+member2 = Member("Bob", "002")
+member3 = Member.from_string("Charlie, 003")
+
+# Creazione di un'istanza di biblioteca
 library = Library()
 
-# Add books to the library
+# Aggiunta dei libri alla biblioteca
 library.add_book(book1)
 library.add_book(book2)
 library.add_book(book3)
 
-# Register members to the library
+# Registrazione dei membri nella biblioteca
 library.register_member(member1)
 library.register_member(member2)
+library.register_member(member3)
 
-# Display the state of the library before lending
-print("Stato della biblioteca prima del prestito:")
-print(library)
-
-# Lend books to members
+# Prestare un libro a un membro
 library.lend_book(book1, member1)
-library.lend_book(book2, member2)
 
-# Display the state of the library after lending
-print("Stato della biblioteca dopo il prestito:")
-print(library)
-
-# Return books to the library
+# Restituire un libro da un membro
 member1.return_book(book1)
-member2.return_book(book2)
 
-# Display the state of the library after returning books
-print("Stato della biblioteca dopo il ritorno dei libri:")
+# Stampa delle statistiche della biblioteca
+Library.library_statistics(library)
+
+# Stampa della biblioteca
 print(library)
+
+
+# Stampa delle statistiche della biblioteca
+Library.library_statistics(library)
+
