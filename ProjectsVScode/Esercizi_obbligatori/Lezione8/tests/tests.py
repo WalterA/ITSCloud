@@ -1,4 +1,4 @@
-from Esercizi_obbligatori.Lezione8.Library_Management_System import Book, Member, Library
+from Lezione8.Library_Management_System import Book, Member, Library
 import unittest
 
 class TestLibrary(unittest.TestCase):
