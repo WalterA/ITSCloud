@@ -46,14 +46,14 @@ class Biblioteca:
 
     def presta_libro(self,titolo):
         for elem in self.catalogo:
-            if elem.titolo == titolo and elem.prestito == False:
+            if elem.titolo == titolo and not elem.prestito:
                 elem.prestito = True
                 return f"libro:{titolo} è stato prestato"
         return f"libro:{titolo} non è disponibile"
 
     def restituisci_libro(self,titolo):
         for elem in self.catalogo:
-            if elem.titolo == titolo and elem.prestito == True:
+            if elem.titolo == titolo and elem.prestito:
                 elem.prestito = False
                 return f"libro:{titolo} è stato restituito"
         return f"libro:{titolo} è già disponibile"
@@ -61,7 +61,7 @@ class Biblioteca:
     def mostra_libri_disponibili(self):
         disponibili = []
         for elem in self.catalogo:
-            if elem.prestito == False:
+            if not elem.prestito:
                 disponibili.append(elem.titolo)
             elif len(disponibili) == 0:
                 return f"Libri non disponibili"
