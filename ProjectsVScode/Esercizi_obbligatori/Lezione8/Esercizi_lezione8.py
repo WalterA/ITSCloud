@@ -12,25 +12,26 @@
 
 # Example 2:
 # Input: nums = [1], k = 1
-# Output: 1
+# Output: 1ss
 # """
 
-def numeri_bellissimi (nums:list[int],k:int)->int:
+def numeri_bellissimi (nums:list[int],k:int):
+    
     lista = []
+    
     for i in range(len(nums)):
         for j in range(i + 1 , len(nums)):
             risultato = nums[i] - nums[j]
-            if risultato == 0:
-                lista.append(nums[i])
-            else:
+            if risultato != 0:
                 lista.append(abs(risultato))
+            
     if len(nums) == 1:
         return nums[0]
+    
     for i in lista:
         if i != k:
-                return abs(i)
-        else:
             return abs(i)
+    
 nums = [1]
 k = 1
 print(numeri_bellissimi (nums,k))
