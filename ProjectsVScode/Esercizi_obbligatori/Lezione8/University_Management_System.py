@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import List
 
 class Person(ABC):
     def __init__(self, name: str, age: int) -> None:
@@ -30,7 +30,7 @@ class Student(Person):
         """
         super().__init__(name, age)
         self.student_id = student_id
-        self.courses: List[Course] = []
+        self.courses: list[Course] = []
     
     def get_role(self) -> str:
         """
@@ -60,7 +60,7 @@ class Professor(Person):
         super().__init__(name, age)
         self.professor_id = professor_id
         self.department = department
-        self.courses: List[Course] = []
+        self.courses: list[Course] = []
     
     def get_role(self) -> str:
         """
