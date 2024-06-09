@@ -58,17 +58,15 @@ class RecipeManager:
             else:
                 f"{recipe_name}' non esiste."
 
- 
-    
-    def list_recipes(self): 
+
+    def list_recipes(self):
         """Elenca tutte le ricette esistenti."""
         for k in self.dizionario.keys():
             lista= [k]
         return lista
 
-    
-    def list_ingredients(self,recipe_name): 
-        """Mostra gli ingredienti di una specifica ricetta. 
+    def list_ingredients(self,recipe_name):
+        """Mostra gli ingredienti di una specifica ricetta.
         Restituisce un elenco di ingredienti o un messaggio di errore se la ricetta non esiste."""
         for k,v in self.dizionario.items():
             if k == recipe_name:
@@ -87,11 +85,9 @@ class RecipeManager:
             return elenco
         else:
             "nessuna ricetta contiene l'ingrediente."
-            
-                
-                        
+
     # Esempi di utilizzo della classe
-	
+
 manager = RecipeManager()
 print(manager.create_recipe("Torta di mele", ["Farina", "Uova", "Mele"]))
 print(manager.add_ingredient("Torta di mele", "Zucchero"))
