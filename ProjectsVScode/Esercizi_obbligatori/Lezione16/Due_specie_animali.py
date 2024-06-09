@@ -1,60 +1,45 @@
-"""
-1. Classe Specie
-
-- Attributi:
-nome (str): Nome della specie.
-popolazione (int): Popolazione iniziale.
-tasso_crescita (float): Tasso di crescita annuo percentuale.
-- Metodi:
-__init__(self, nome: str, popolazione_iniziale: int, tasso_crescita: float):
-Costruttore per inizializzare gli attributi della classe.
-cresci(self): Metodo per aggiornare la popolazione per l'anno successivo.
-anni_per_superare(self, altra_specie: 'Specie') -> int: Metodo per calcolare in quanti anni 
-la popolazione di questa specie supererà quella di un'altra specie.
-getDensita(self, area_kmq: float) -> int: Metodo per calcolare in quanti anni la popolazione
-raggiungerà una densità di 1 individuo per km².
-import math
-"""
 class Specie:
     def __init__(self, nome: str, popolazione_iniziale: int, tasso_crescita: float):
         self.nome = nome
         self.popolazione = popolazione_iniziale
-        self.tasso_crescita = tasso_crescita / 100  # Converti il tasso di crescita in decimale
-
+        self.tasso_crescita = tasso_crescita
+    
     def cresci(self):
-        self.popolazione = int(self.popolazione * (1 + self.tasso_crescita))
+        self.popolazione = self.popolazione * (1 + self.tasso_crescita / 100)
     
     def anni_per_superare(self, altra_specie: 'Specie') -> int:
         anni = 0
-        pop_self = self.popolazione
-        pop_altra = altra_specie.popolazione
-        
-        while pop_self <= pop_altra:
-            pop_self *= (1 + self.tasso_crescita)
-            pop_altra *= (1 + altra_specie.tasso_crescita)
-            anni += 1
-        
+        while self.popolazione <= altra_specie.popolazione:
+            if anni < 1000:
+                self.cresci()
+                altra_specie.cresci()
+                anni += 1
         return anni
-
-    def anni_per_densita(self, area_kmq: float) -> int:
+    
+    def getDensita(self, area_kmq: float) -> int:
         anni = 0
-        pop_self = self.popolazione
-        
-        while pop_self < area_kmq:
-            pop_self *= (1 + self.tasso_crescita)
+        while self.popolazione / area_kmq < 1 and anni < 1000:
+            self.cresci()
             anni += 1
-        
         return anni
 
-# Esempio di utilizzo
-bufali_klingon = Specie("Bufali Klingon", 1000, 5)  # 1000 individui, tasso di crescita 5%
-elefanti = Specie("Elefanti", 800, 8)  # 800 individui, tasso di crescita 8%
+class BufaloKlingon(Specie):
+    def __init__(self, popolazione_iniziale: int, tasso_crescita: float):
+        super().__init__("Bufalo Klingon", popolazione_iniziale, tasso_crescita)
 
-# Calcola in quanti anni la popolazione degli Elefanti supererà quella dei Bufali Klingon
-anni_superamento = elefanti.anni_per_superare(bufali_klingon)
-print(f"Popolazione degli Elefanti supererà quella dei Bufali Klingon in {anni_superamento} anni.")
+class Elefante(Specie):
+    def __init__(self, popolazione_iniziale: int, tasso_crescita: float):
+        super().__init__("Elefante", popolazione_iniziale, tasso_crescita)
 
-# Calcola in quanti anni la popolazione dei Bufali Klingon raggiungerà una densità di 1 individuo per km²
-area_riserva = 2000  # area della riserva in km²
-anni_densita = bufali_klingon.anni_per_densita(area_riserva)
-print(f"Popolazione dei Bufali Klingon raggiungerà una densità di 1 individuo per km² in {anni_densita} anni.")
+# Esempio di utilizzo:
+# Creazione delle istanze delle specie
+bufalo_klingon = BufaloKlingon(100, 15)  # Crea un'istanza di BufaloKlingon con popolazione 100 e tasso di crescita 15%
+elefante = Elefante(10, 35)  # Crea un'istanza di Elefante con popolazione 10 e tasso di crescita 35%
+
+# Calcolo degli anni necessari per superare
+anni_necessari = elefante.anni_per_superare(bufalo_klingon)  # Calcola gli anni necessari affinché gli elefanti superino i bufali Klingon
+print(f"Anni necessari perché la popolazione di elefanti superi quella dei bufali Klingon: {anni_necessari}")
+
+# Calcolo della densità di popolazione per i Bufali Klingon
+anni_densita = bufalo_klingon.getDensita(1500)  # Calcola gli anni necessari per raggiungere una densità di 1 bufalo Klingon per km²
+print(f"Anni necessari per raggiungere una densità di 1 Bufalo Klingon per km quadrato: {anni_densita}")
