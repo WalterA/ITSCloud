@@ -7,7 +7,7 @@ class Specie:
     def cresci(self):
         self.popolazione = self.popolazione * (1 + self.tasso_crescita / 100)
     
-    def anni_per_superare(self, altra_specie: 'Specie') -> int:
+    def anni_per_superare(self, altra_specie: "Specie") -> int:
         anni = 0
         while self.popolazione <= altra_specie.popolazione:
             if anni < 1000:
