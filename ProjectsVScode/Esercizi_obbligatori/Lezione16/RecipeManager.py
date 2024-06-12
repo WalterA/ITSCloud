@@ -43,6 +43,7 @@ class RecipeManager:
                 return f"L'ingrediente '{ingredient}' non è presente nella ricetta '{recipe_name}'."
         else:
             return f"La ricetta '{recipe_name}' non esiste."
+        
     def update_ingredient(self,recipe_name, old_ingredient, new_ingredient): 
         """Sostituisce un ingrediente con un altro nella ricetta specificata. 
         Restituisce la ricetta aggiornata o un messaggio di errore se l'ingrediente

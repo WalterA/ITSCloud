@@ -14,7 +14,7 @@ class Specie:
                 self.cresci()
                 altra_specie.cresci()
                 anni += 1
-        return anni
+        return anni 
     
     def getDensita(self, area_kmq: float) -> int:
         anni = 0
