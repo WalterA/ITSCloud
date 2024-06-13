@@ -1,13 +1,11 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-    
         # Insieme per tenere traccia dei caratteri nella finestra corrente
         char_set = set()
         # Inizio della finestra
         start = 0
         # Lunghezza massima della sottostringa senza ripetizioni
         max_length = 0
-        
         for end in range(len(s)):
             # Se il carattere è già nel set, rimuovi i caratteri dall'inizio fino a quando non è più nel set
             while s[end] in char_set:
@@ -19,12 +17,6 @@ class Solution:
             max_length = max(max_length, end - start + 1)
         
         return max_length
-
-# Esempio di utilizzo:
-s = "abcabcbb"
-solution = Solution()
-ok = solution.lengthOfLongestSubstring(s)
-print(ok)  # Output: 3
 
 # Esempio di utilizzo:
 s = "abcabcbb"

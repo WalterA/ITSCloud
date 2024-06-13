@@ -1,0 +1,22 @@
+1 Voli
+    1.1 Codice
+    1.2 Durata
+    1.3 Compagnia vedi 2.1
+    1.4 partenze e arrivi vedi 3
+
+2 Compagnie
+    2.1 nome 
+    2.2 anno_fondazione
+    2.3 citta_sede
+
+3 Aeroporti
+    3.1 partenze
+    3.2 arrivi
+    3.3 codice
+    3.4 nome
+    3.5 citta
+        3.5.1 nome
+        3.5.2 numero di abitanti
+    3.6 nazione
+
+
