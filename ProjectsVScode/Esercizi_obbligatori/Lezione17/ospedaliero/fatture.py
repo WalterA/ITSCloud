@@ -29,11 +29,17 @@ class Fattura:
         self.fatture = num
         return self.fatture
     
-    def addPatient(newPatient):
+    def addPatient(self,newPatient: Paziente):
         """consente di aggiungere un paziente alla lista 
         di pazienti di un dottore, aggiornando poi il numero di fatture ed il salario, 
         richiamando il metodo getFatture() e getSalary().  Stampare "Alla lista del Dottor 
         cognome è stato aggiunto il paziente {codice_identificativo}"""
+        self.patient.append(newPatient)
+        self.getSalary()
+        self.getFatture()
+        print(f"Alla lista del Dottor 
+        {self.lastname} è stato aggiunto il paziente {self.id}")
+        
         
         
         

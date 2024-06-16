@@ -1,0 +1,25 @@
+1.1 studenti
+    1.1 nome str
+    1.2 codice fiscale str
+    1.3 numero matricola str
+    1.4 data di nascita data
+    1.5 luogo di nascita str
+    1.6 facolta vedi 2.1 (anno d'iscrizione)
+    1.7 corsi vedi 4.1 (superati)
+
+2.1 facolta
+    2.1 nome str
+    2.2 tipo str 
+
+3.1 professori
+    3.1 nome str
+    3.2 data di nascita data
+    3.3 cod f str
+    3.4luogo n str
+    3.5 corso insegnato vedi 4.1
+
+4.1 corsi
+    4.1 codice str
+    4.2 nome str
+    4.3 numero ore di lezione int >=0 
+    4.4 facolta vedi 2.1
