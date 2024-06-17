@@ -37,8 +37,8 @@ class Fattura:
         self.patient.append(newPatient)
         self.getSalary()
         self.getFatture()
-        print(f"Alla lista del Dottor 
-        {self.lastname} è stato aggiunto il paziente {self.id}")
+        print(f"Alla lista del Dottor {self.lastname} è stato aggiunto il paziente {self.id}") #da sistemare
+        
         
         
         
