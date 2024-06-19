@@ -23,7 +23,7 @@ class Noleggio:
         rimuoverlo dalla lista dei film disponibili in negozio, poi riempire il dizionario rented_film in questo modo:
         la chiave sarà l'id del cliente che noleggia (id_client)
         il corrispondente valore sarà una lista contenente i film noleggiati da quel cliente."""
-        if self.isAvaible(film):
+        if self.isAvaible(film):    
             self.lista.remove(film)
             if clientID in self.rented_film:
                 self.rented_film[clientID].append(film)
