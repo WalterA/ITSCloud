@@ -1,3 +1,4 @@
+
 class Pagamento:
     def __init__(self) -> None:
         self.__impoto_pagamento : float = None

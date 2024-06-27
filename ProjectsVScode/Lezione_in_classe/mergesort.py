@@ -12,6 +12,7 @@ def mergesort(lista_input: list[int])-> list[int]:
     print(f"L:{leftlist}R:{rightlist}")
     result = merge(leftlist,rightlist)
     return result
+
 def merge (list1:list[int], lista2:list[int])-> list[int]:
     i, j = 0,0
     result:list[int] = [None for _ in range(len(list1 + lista2))]

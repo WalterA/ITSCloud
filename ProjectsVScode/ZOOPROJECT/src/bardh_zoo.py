@@ -1,3 +1,17 @@
+import time
+def decor(func):
+    
+    def wrapper(*args):
+        start = time.time()
+        func(*args)
+        end = time.time()
+        elapsed_time = end - start 
+        print(f"{elapsed_time=}" )
+        
+    return wrapper 
+
+
+@decor
 class Animal:
 # Definisce la classe Animal.
 
@@ -50,7 +64,7 @@ class Animal:
         return f'Animal(name={self.name}, species={self.species}, age={self.age}, height={round(self.height,3)}, width={round(self.width,3)}, habitat={self.preferred_habitat})'
         # Restituisce una stringa formattata che rappresenta le informazioni dell'animale.
 
-    
+@decor   
 class Fence:
 # Definisce la classe Fence.
 
@@ -214,7 +228,7 @@ class ZooKeeper:
     # Definisce il metodo speciale __str__ per ottenere una rappresentazione in stringa dell'oggetto ZooKeeper.
         return f'ZooKeeper(name={self.name}, surname={self.surname}, id={self.id})'
         # Restituisce una stringa formattata che rappresenta le informazioni dello ZooKeeper.
-
+@decor
 class Zoo:
 # Definisce la classe Zoo.
 
@@ -244,28 +258,28 @@ class Zoo:
             # Stampa una linea di separazione per distinguere i recinti.
 
 """PRINT"""
-# simba = Animal(name="Simba", species="Leone", age=5, height=2, width=3, preferred_habitat="Savana")
-# simba1 = Animal(name="Simba", species="Leone", age=5, height=2, width=2, preferred_habitat="Giungla")
+simba = Animal(name="Simba", species="Leone", age=5, height=2, width=3, preferred_habitat="Savana")
+simba1 = Animal(name="Simba", species="Leone", age=5, height=2, width=2, preferred_habitat="Giungla")
 
-# savana = Fence(area=100, temperature=27, habitat="Savana")
-# zoo_keeper = ZooKeeper(name="Bardh", surname="Prenkaj", id="PRNBDH95M09Z160W")
+savana = Fence(area=100, temperature=27, habitat="Savana")
+zoo_keeper = ZooKeeper(name="Bardh", surname="Prenkaj", id="PRNBDH95M09Z160W")
 
-# print(f"L'area del fence Savana è {savana.area}")
-# zoo = Zoo(fences=[savana], zoo_keepers=[zoo_keeper])
-# zoo_keeper.add_animal(simba, savana)
-# zoo_keeper.add_animal(simba1, savana)
-# print(f"L'area del fence Savana è {savana.area}")
-# # old_area = 0
-# # for i in range(1000):
-# #     zoo_keeper.feed(simba)
-# #     if old_area == round(simba.area(), 3):
-# #         break
-# #     print(f"It={i+1} --> L'area residua del recinto è {round(simba.fence.area, 3)}")
-# #     print(f"It={i+1} --> Simba è diventato grande = {round(simba.area(), 3)}")
-# #     old_area = round(simba.area(), 3)
+print(f"L'area del fence Savana è {savana.area}")
+zoo = Zoo(fences=[savana], zoo_keepers=[zoo_keeper])
+zoo_keeper.add_animal(simba, savana)
+zoo_keeper.add_animal(simba1, savana)
+print(f"L'area del fence Savana è {savana.area}")
+old_area = 0
+for i in range(1000):
+    zoo_keeper.feed(simba)
+    if old_area == round(simba.area(), 3):
+        break
+    print(f"It={i+1} --> L'area residua del recinto è {round(simba.fence.area, 3)}")
+    print(f"It={i+1} --> Simba è diventato grande = {round(simba.area(), 3)}")
+    old_area = round(simba.area(), 3)
     
-# pumba = Animal(name="Pumba", species="Porco", age=25, height=2, width=5, preferred_habitat="Savana")
-# zoo_keeper.add_animal(pumba, savana)
-# zoo.describe_zoo()
+pumba = Animal(name="Pumba", species="Porco", age=25, height=2, width=5, preferred_habitat="Savana")
+zoo_keeper.add_animal(pumba, savana)
+zoo.describe_zoo()
 """Fine print"""
 """"""
