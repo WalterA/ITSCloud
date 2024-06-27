@@ -1,5 +1,6 @@
 #-----------------------decoration------------------------ 
 import time
+from contextlib import contextmanager
 
 def say_hello(name:str) ->None:
     
@@ -59,3 +60,63 @@ random_list(8)
 # say_hello("wa")
 # say_ciao = decorator(say_ciao)
 # say_ciao("wa")
+
+def generatore():
+    yield "A"
+    yield "B"
+    yield "C"
+    yield "D"
+    
+# prova = generatore()
+# print(next(prova))
+# print(next(prova))
+# print(next(prova))
+# print(next(prova))
+# print(next(prova))
+
+@contextmanager
+def decor_manager(*args):
+    
+   
+        start = time.time()
+        
+        yield
+        end = time.time()
+        elapsed_time = end - start 
+        print(f"{elapsed_time=}")
+        
+  
+
+with decor_manager() as _:
+    print("ciao")
+
+def funzione(id:int):
+    import time
+    import random
+    sleep_time : int = random.randint(1,10)
+    print(f"{id=} time{time.time()}")
+    time.sleep(sleep_time)
+    print(f"{id=}time {time.time()}")
+    
+if __name__ == "__main__":
+    
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        executor.map(funzione, range(10))
+    
+    
+    
+    # lista_t:list[threading.Thread] = []
+    
+    # for id in range(1):
+    #     x: threading.Thread= threading.Thread(target=funzione,args=(id,))
+    #     lista_t.append(x)
+    #     print(f"prima di rannare il thred {time.time()} ")
+    #     x.start()
+    #     print(f"ho rannato{time.time()}")
+    # for t in lista_t:
+    #     t.join()
+    #     print(f"Terminato")
+    
