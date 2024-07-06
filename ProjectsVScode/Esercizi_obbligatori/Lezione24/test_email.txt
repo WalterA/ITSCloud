@@ -1,0 +1,3 @@
+Da:mittente@example.com,A:destinatario@example.com
+TiTolo:Test Titolo
+Messaggio:Questo è un test

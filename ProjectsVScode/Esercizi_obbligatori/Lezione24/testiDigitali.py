@@ -64,10 +64,51 @@ class File(Documento):
 
 
 class testdocumento(unittest.TestCase):
-    def Text(self):
-        var=Documento("testo")
-        var.getText("testo2")
-        self.assertEqual(var.getText(),"testo2")
+    def test_get_text(self):
+        var = Documento("testo")
+        self.assertEqual(var.getText(), "testo")
+        
+    def test_is_ln_Text(self):
+        var = Documento("testo")
+        self.assertTrue(var.islnText("testo"))
+        self.assertFalse(var.islnText("bobo"))
+
+class TestEmail(unittest.TestCase):
+    def test_getText(self):
+        self.email = Email("Questo è un test", "mittente@example.com", "destinatario@example.com", "Test Titolo")
+        expected_text = 'Da:mittente@example.com,A:destinatario@example.com\nTiTolo:Test Titolo\nMessaggio:Questo è un test'
+        self.assertEqual(self.email.getText(), expected_text)
+
+    def test_writeToFile(self):
+        self.email = Email("Questo è un test", "mittente@example.com", "destinatario@example.com", "Test Titolo")
+        filename = "test_email.txt"
+        self.email.writeToFile(filename)
+        with open(filename, 'r') as reader:
+            content = reader.read()
+        expected_text = 'Da:mittente@example.com,A:destinatario@example.com\nTiTolo:Test Titolo\nMessaggio:Questo è un test'
+        self.assertEqual(content, expected_text)
+        
+    def test_isInText(self):
+        self.email = Email("Questo è un test", "mittente@example.com", "destinatario@example.com", "Test Titolo")
+        self.assertTrue(self.email.islnText("test"))
+        self.assertFalse(self.email.islnText("nonpresente"))
+
+class TestFile(unittest.TestCase):
+    def setUp(self):
+        self.filename = "test_file.txt"
+        with open(self.filename, 'w') as writer:
+            writer.write("Questo è il contenuto del file")
+        self.file = File(self.filename)
+        
+
+    def test_getText(self):
+        expected_text = f'Percorso:{self.filename}, Contenuto:Questo è il contenuto del file'
+        self.assertEqual(self.file.getText(), expected_text)
+
+    def test_isInText(self):
+        self.assertTrue(self.file.islnText("contenuto"))
+        self.assertFalse(self.file.islnText("nonpresente"))  
+
 
 if __name__ == '__main__':
     unittest.main()
