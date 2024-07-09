@@ -43,7 +43,13 @@ class Horse(Animal):
     def verso(self):
         print("Hyhyhyhyh!")
         
-        
+    
+    
+lista_animali: list[Animal] = [Dog("Fido", 12), Cat("Silvestro", 10), Horse("Spirit", 15)]    
+for animale in lista_animali:
+    
+    animale.verso()
+
 cane_1: Dog = Dog(name="Fido", age=3)
 
 cavallo_1: Horse = Horse(name="Spirit", age=10)
