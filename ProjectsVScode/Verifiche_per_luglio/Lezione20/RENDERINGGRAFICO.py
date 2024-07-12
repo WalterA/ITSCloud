@@ -29,6 +29,7 @@ class Quadrato(Forma):
                 else:
                     print(" ", end=" ")
             print()  
+            
 class Rettangolo(Forma):
     def __init__(self, base:float, altezza:float):
         super().__init__("Rettangolo")

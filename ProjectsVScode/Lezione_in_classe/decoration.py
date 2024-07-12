@@ -48,6 +48,7 @@ def decor(func):
 @decor
 def ciao ()->None:
     print("ciao")
+    
 @decor
 def random_list ( upper_bound:int):
     import random
