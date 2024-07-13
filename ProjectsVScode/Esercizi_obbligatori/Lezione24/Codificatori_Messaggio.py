@@ -106,15 +106,49 @@ class CifratoreACombinazione(CodificatoreMessaggio, DecodificatoreMessaggio):
         with open(filename, 'w') as file:
             file.write(testo)
 
-# Example usage for CifratoreAScorrimento
-cifratore_scor = CifratoreAScorrimento(3)
-testo_in_chiaro = "abcdefghi"
-testo_cifrato = cifratore_scor.codifica(testo_in_chiaro)
-print("Cifrato:", testo_cifrato)
-print("Decifrato:", cifratore_scor.decodifica(testo_cifrato))
+# Test 
+def test_cifratore_a_scorrimento():
 
-# Example usage for CifratoreACombinazione
-cifratore_comb = CifratoreACombinazione(1)
-testo_cifrato_comb = cifratore_comb.codifica(testo_in_chiaro)
-print("Cifrato combinato:", testo_cifrato_comb)
-print("Decifrato combinato:", cifratore_comb.decodifica(testo_cifrato_comb))
+    scorrimento_cipher = CifratoreAScorrimento(chiave=3)
+    
+
+    testo_in_chiaro = "ciao mondo"
+    
+    
+    testo_codificato = scorrimento_cipher.codifica(testo_in_chiaro)
+    
+    
+    print("Testo codificato (Scorrimento):", testo_codificato)
+    
+    
+    testo_decodificato = scorrimento_cipher.decodifica(testo_codificato)
+    
+    
+    print("Testo decodificato (Scorrimento):", testo_decodificato)
+
+
+
+def test_cifratore_a_combinazione():
+    
+    combinazione_cipher = CifratoreACombinazione(n=3)
+    
+
+    testo_in_chiaro = "ciao mondo"
+    
+    
+    testo_codificato = combinazione_cipher.codifica(testo_in_chiaro)
+    
+    
+    print("Testo codificato (Combinazione):", testo_codificato)
+    
+    
+    testo_decodificato = combinazione_cipher.decodifica(testo_codificato)
+    
+    
+    print("Testo decodificato (Combinazione):", testo_decodificato)
+
+
+
+test_cifratore_a_scorrimento()
+test_cifratore_a_combinazione()
+
