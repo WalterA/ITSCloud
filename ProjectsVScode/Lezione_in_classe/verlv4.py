@@ -108,7 +108,7 @@ def somma_elementi(x: list[int], y: list[int]) -> list[int]:
     risultato = []
    
     for i in range(len(x)):
-        if i < len(y):  # Aggiungi questo controllo
+        if i < len(y): 
             conta = x[i] + y[i]
             risultato.append(conta)
     return risultato
