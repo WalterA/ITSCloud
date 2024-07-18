@@ -1,5 +1,5 @@
 class Member:
-    def __init__(self,name:str,id:str,registrazione,email:str,password:str) -> None:
+    def __init__(self,name:str,id:str,registrazione:dict[list],email:str,password:str) -> None:
         self.name = name
         self.id = id
         self.registrazione = registrazione
@@ -7,34 +7,29 @@ class Member:
         self.password = password
         
     
-class Database:
-    def __init__(self) -> None:
-        self.db:dict = {}
-    def database (self,membri:Member):
-        
-        if self.controllo(membri) ==True:
-            self.db[membri.id] = [membri]
-        else:
-            return('controllo non conforme')
-        
+class Database(Member):
+    def __init__(self, name: str, id: str, registrazione: dict[list], email: str, password: str) -> None:
+        super().__init__(name, id, registrazione, email, password)
+    
     def controllo (self, membri:Member):
-        dominio:list[str] = ["gmail.com",
+        dominio_email:list[str] = ["gmail.com",
                              "yahoo.com",
                              "ymail.com",
                              "rocketmail.com",
                              "outlook.com",
                              "hotmail.com",
                              "live.com"]
-        if membri.id not in self.db:
-            nomeutente,dominio_email = membri.email.split("@")
-            if dominio_email in dominio:
+        map:list=["!","?","*","£","$","%","=","^","§"]
+        nome , dominio =self.email.split("@")
+        if dominio in dominio_email:
                 if len(membri.password) >= 10:
-                    if membri.password.endswith("!","?","*","£","$","%","=","^","§") and membri.password[0].isupper():
-                        contiene_numero = False
+                    if self.password in map:
+                        
                         for char in membri.password:
                             if '0' <= char <= '9':
                                 contiene_numero = True
                                 return True
+                            
                         
                         if not contiene_numero:
                             return 'inserisci almeno un numero'
