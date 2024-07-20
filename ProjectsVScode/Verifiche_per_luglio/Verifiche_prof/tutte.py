@@ -171,7 +171,40 @@ def update_contact(dictionary: dict, name: str, email: str =None, telefono: int=
 # # {'profile': 'Laura Neri', 'email':
 # # 'laura.new@domain.com', 'telefono':
 # # 84736736}
-#----LEZIONE10-----
+#---Lezione9-----------------------------------------------------------------------------------------------------
+#Data una stringa s e una lista di stringhe wordDict,
+# restituisce True se s può essere segmentato in una sequenza separata da spazi
+# di una o più parole del dizionario; False altrimenti.
+def word_break(s: str, wordDict: list[str]) -> bool:
+    for i in wordDict:
+        if i in wordDict:
+            s = s.replace(i, "")
+    if s == "":
+        return True
+    else:
+        return False
+# print(word_break("leetcode",["leet","code"]))
+# print(word_break("applepenapple", ["apple","pen"]))
+# print(word_break("catsandog",["cats","dog","sand","and","cat"]))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----LEZIONE10------------------------------------------------------------------------------------------------
 # Scrivere il frammento di codice che cambi il valore intero memorizzato nella variabile x nel seguente modo:
 # - se x è pari, deve essere diviso per 2;
 # - se x è dispari deve essere moltiplicato per 3 e gli deve essere sottratto 1.
