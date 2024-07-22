@@ -47,6 +47,9 @@ def find_missing_number_and_position(lst):
             # Il numero mancante è lst[i-1] + 1
             # La posizione è i
             return (lst[i-1] + 1, i)
+            # numero = lst[i-1] + 1
+            # posizione = i
+            # return numero, posizione
     
     # Se non c'è nessun numero mancante, restituire None
     return None
@@ -56,3 +59,17 @@ lst = [1, 2, 3, 5, 6]
 
 missing_number, position = find_missing_number_and_position(lst)
 print(f"Il numero mancante è: {missing_number}, alla posizione: {position}")
+
+
+from collections import Counter
+
+
+class Solution:
+    def singleNumber(self, nums: list[int]) -> int:
+        lista:list = Counter(nums)
+        for i in lista:
+            if lista[i] == 1:
+                return i
+nums = [2,2,1]
+ok=Solution()
+print(ok.singleNumber(nums))
