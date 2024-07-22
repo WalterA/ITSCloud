@@ -53,4 +53,3 @@ if isinstance(a, (int, float, str)):
 else:
     print("a non è un tipo di dato int, float o str")
 
-enumerate
