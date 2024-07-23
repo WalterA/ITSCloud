@@ -31,9 +31,10 @@ number_str = "-".join(map(str, numbers))
 print(number_str)  # Output: 1-2-3-4-5
 
 # A tuple of strings
-data = ("2024", "07", "22")
+data = ("20240722")
 
 # Join the tuple with slashes
 date = "/".join(data)
-
-print(date)  # Output: 2024/07/22
+str(date)
+dati = date.split("/")
+print(dati)  # Output: 2024/07/22
