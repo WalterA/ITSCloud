@@ -263,7 +263,7 @@ class Movie:
             self.is_rended = False
     
 class Customer:
-    def __init__(self, customer_id:str, name:str, rented_movie:list[Movie] = []) -> None:
+    def __init__(self, customer_id:str, name:str) -> None:
         self.customer_id = customer_id
         self.nome = name
         self.rented_movie:list[Movie] = []
