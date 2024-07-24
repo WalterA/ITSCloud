@@ -1,5 +1,4 @@
-#Scrivi una funzione che, data una lista, ritorni un dictionary che mappa ogni 
-# elemento alla sua frequenza nella lista.
+#Scrivi una funzione che, data una lista, ritorni un dictionary che mappa ogni elemento alla sua frequenza nella lista.
 from collections import Counter
 def frequency_dict(elements: list) -> dict:
     f:list = Counter(elements)
@@ -38,14 +37,7 @@ def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
         else:
             dict3[key] = val
     return dict3
-	# dict3 = dict(dict1)
-    # for key, val in dict2.items():
-    #     if key in dict3:
-    #         dict3[key] += val
-    #     else:
-    #         dict3[key] = val
-
-    # return dict3
+	
 
 # print(merge_dictionaries({'a': 1, 'b': 2}, {'b': 3, 'c': 4}))
 
@@ -162,8 +154,7 @@ def check_combination(conditionA: bool, conditionB: bool, conditionC: bool) -> s
     else:
         return ("Operazione negata")
 #print(check_combination(True, False, True))
-
-#sistema per la gestione delle ricette in Python
+#la gestione delle ricette in Python 
 class RecipeManager:
     def __init__(self) -> None:
         self.elenco_ricette:dict[str,list]={}
@@ -217,10 +208,75 @@ class RecipeManager:
                 return {k: self.elenco_ricette[k]}
             
         return (f'NON esiste la ricetta:{ingredient=}')
+#creeremo una gerarchia di classi per rappresentare diversi tipi di veicoli.
+class Veicolo:
+    def __init__(self, marca:str,modello:str,anno:int) -> None:
+        self.marca = marca
+        self.modello = modello
+        self.anno = anno
+    def descrivi_veicolo(self):
+        print(f'Marca: {self.marca}, Modello: {self.modello}, Anno: {self.anno}')
+    
+class Auto(Veicolo):
+    def __init__(self, marca: str, modello: str, anno: int, numero_porte:int) -> None:
+        super().__init__(marca, modello, anno)
+        self.numero_porte = numero_porte
+        
+    def descrivi_veicolo(self):
+        print(f"Marca: {self.marca}, Modello: {self.modello}, Anno: {self.anno},  Numero di porte: {self.numero_porte}")
+    
+class Moto(Veicolo):
+    def __init__(self, marca: str, modello: str, anno: int, tipo:str) -> None:
+        super().__init__(marca, modello, anno)
+        self.tipo = tipo
+    
+    def descrivi_veicolo(self):
+        print(f"Marca: {self.marca}, Modello: {self.modello}, Anno: {self.anno}, Tipo : {self.tipo}")
+
+	
+
+# veicolo = Veicolo("Generic", "Model", 2020)  # Crea un'istanza della classe Veicolo
+# auto = Auto("Toyota", "Corolla", 2021, 4)  # Crea un'istanza della classe Auto
+# moto = Moto("Yamaha", "R1", 2022, "sportiva")  # Crea un'istanza della classe Moto
+
+# veicolo.descrivi_veicolo()  # Test del metodo descrivi_veicolo per Veicolo
+# auto.descrivi_veicolo()  # Test del metodo descrivi_veicolo per Auto
+# moto.descrivi_veicolo()  
+
+#sistema di videonoleggio
+class Movie:
+    def __init__(self, movie_id:str, title:str, director:str) -> None:
+        self.movie_id = movie_id
+        self.title = title
+        self.director = director
+        self.is_rended = False
+        
+    def rent(self):
+        if self.is_rended is False:
+            self.is_rended = True 
+        else:
+            return f'Il film {self.title} è già noleggiato.'
+    def return_movie(self):
+        if self.is_rended is True:
+            return f"Il film {self.title} non è attualmente noleggiato."      
+        else:
+            self.is_rended = False
+    
+class Customer:
+    def __init__(self, customer_id:str, name:str) -> None:
+        self.customer_id = customer_id
+        self.nome = name
+        self.rented_movie:list[Movie] = []
+        
+    def rent_movie(self, movie:Movie):
+        if movie.is_rended is True:
+            self.rented_movie.append(movie)
+        else:
+            f'Il film {movie.title} è già noleggiato.'
+    def return_movie(self,movie:Movie):
+        if movie in self.rented_movie.remove(movie):
             
-manager = RecipeManager()
-print(manager.create_recipe("Torta di mele", ["Farina", "Uova", "Mele"]))
-print(manager.add_ingredient("Torta di mele", "Zucchero"))
-print(manager.list_recipes()) # ['Torta di mele']
-print(manager.list_ingredients("Torta di mele"))
-print(manager.search_recipe_by_ingredient("Uova"))
+        
+                
+        
+        
