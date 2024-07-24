@@ -1,4 +1,5 @@
-#Scrivi una funzione che, data una lista, ritorni un dictionary che mappa ogni elemento alla sua frequenza nella lista.
+#Scrivi una funzione che, data una lista, ritorni un dictionary che mappa ogni 
+# elemento alla sua frequenza nella lista.
 from collections import Counter
 def frequency_dict(elements: list) -> dict:
     f:list = Counter(elements)
@@ -37,7 +38,14 @@ def merge_dictionaries(dict1: dict, dict2: dict) -> dict:
         else:
             dict3[key] = val
     return dict3
-	
+	# dict3 = dict(dict1)
+    # for key, val in dict2.items():
+    #     if key in dict3:
+    #         dict3[key] += val
+    #     else:
+    #         dict3[key] = val
+
+    # return dict3
 
 # print(merge_dictionaries({'a': 1, 'b': 2}, {'b': 3, 'c': 4}))
 
@@ -153,5 +161,66 @@ def check_combination(conditionA: bool, conditionB: bool, conditionC: bool) -> s
         return ("Operazione permessa")
     else:
         return ("Operazione negata")
-print(check_combination(True, False, True))
+#print(check_combination(True, False, True))
+
+#sistema per la gestione delle ricette in Python
+class RecipeManager:
+    def __init__(self) -> None:
+        self.elenco_ricette:dict[str,list]={}
+        
+    def create_recipe(self,name:str,ingredients:list[str])->dict:
+
+        if name not in self.elenco_ricette:
+            self.elenco_ricette[name]= ingredients
+            
+        else:
+            return (f'esiste la ricetta:{name=}')
+        return {name: self.elenco_ricette[name]}
+    def add_ingredient(self,recipe_name:str,ingredient:str)->dict:
+        if recipe_name in self.elenco_ricette:
+            if ingredient in self.elenco_ricette[recipe_name]:
+                return (f'esiste già l\'ingrediente:{ingredient=}')
+            else:
+                self.elenco_ricette[recipe_name].append(ingredient)
+        else:
+            return (f'esiste la ricetta:{recipe_name=}')
+        return {recipe_name: self.elenco_ricette[recipe_name]}
+    def remove_ingredient(self,recipe_name:str, ingredient:str)->dict:
+        if recipe_name not in self.elenco_ricette:
+            return {'error': f'La ricetta "{recipe_name}" non esiste.'}
+        if ingredient not in self.elenco_ricette[recipe_name]:
+            return {'error': f'L\'ingrediente "{ingredient}" non esiste nella ricetta "{recipe_name}".'}
+        self.elenco_ricette[recipe_name].remove(ingredient)
+        return {recipe_name: self.elenco_ricette[recipe_name]}
     
+    def update_ingredient(self,recipe_name:str, old_ingredient:str, new_ingredient:str)->dict:
+        if recipe_name in self.elenco_ricette:
+            if old_ingredient in self.elenco_ricette[recipe_name]:
+                index = self.elenco_ricette[recipe_name].index(old_ingredient)
+                self.elenco_ricette[recipe_name][index] = new_ingredient
+                return {recipe_name: self.elenco_ricette[recipe_name]}
+            else:
+                return (f'NON esiste l\'INGR:{old_ingredient=}')
+        else:
+            return (f'NON esiste la ricetta:{recipe_name=}')
+    def list_recipes(self)->str:
+        return list(self.elenco_ricette.keys())
+    
+    def list_ingredients(self,recipe_name:str)->list:
+        if recipe_name not in self.elenco_ricette:
+            return {'error': f'La ricetta "{recipe_name}" non esiste.'}
+        return list(self.elenco_ricette[recipe_name])
+    
+    def search_recipe_by_ingredient(self,ingredient:str)->dict:
+        for k,v in self.elenco_ricette.items():
+            if ingredient in v:
+                return {k: self.elenco_ricette[k]}
+            
+        return (f'NON esiste la ricetta:{ingredient=}')
+            
+manager = RecipeManager()
+print(manager.create_recipe("Torta di mele", ["Farina", "Uova", "Mele"]))
+print(manager.add_ingredient("Torta di mele", "Zucchero"))
+print(manager.list_recipes()) # ['Torta di mele']
+print(manager.list_ingredients("Torta di mele"))
+print(manager.search_recipe_by_ingredient("Uova"))
