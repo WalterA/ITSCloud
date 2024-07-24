@@ -263,7 +263,7 @@ class Movie:
             self.is_rended = False
     
 class Customer:
-    def __init__(self, customer_id:str, name:str) -> None:
+    def __init__(self, customer_id:str, name:str, rented_movie:list[Movie] = []) -> None:
         self.customer_id = customer_id
         self.nome = name
         self.rented_movie:list[Movie] = []
@@ -274,8 +274,12 @@ class Customer:
         else:
             f'Il film {movie.title} è già noleggiato.'
     def return_movie(self,movie:Movie):
-        if movie in self.rented_movie.remove(movie):
-            
+        if movie in self.rented_movie:
+            self.rented_movie.remove(movie)
+        else:
+            f"Il film {movie.title} non è stato noleggiato da questo cliente."
+class VideoRentalStore:
+    def __init__(self, movie:dict[str,Movie], customers:dict[str,Customer]) -> None:            
         
                 
         
