@@ -249,38 +249,232 @@ class Movie:
         self.movie_id = movie_id
         self.title = title
         self.director = director
-        self.is_rended = False
+        self.is_rented = False
         
     def rent(self):
-        if self.is_rended is False:
-            self.is_rended = True 
+        if not self.is_rented:
+            self.is_rented = True 
         else:
-            return f'Il film {self.title} è già noleggiato.'
+            print(f'Il film \'{self.title}\' è già noleggiato.')
+            return None
+        
     def return_movie(self):
-        if self.is_rended is True:
-            return f"Il film {self.title} non è attualmente noleggiato."      
+        
+        if  self.is_rented:
+            self.is_rented = False
+            
         else:
-            self.is_rended = False
+            print(f"Il film \'{self.title}\' non è attualmente noleggiato.")      
+            return None
     
 class Customer:
     def __init__(self, customer_id:str, name:str) -> None:
         self.customer_id = customer_id
         self.nome = name
-        self.rented_movie:list[Movie] = []
+        self.rented_movie: list[Movie] = []
         
     def rent_movie(self, movie:Movie):
-        if movie.is_rended is True:
+        if not movie.is_rented:
+            movie.rent()
             self.rented_movie.append(movie)
         else:
-            f'Il film {movie.title} è già noleggiato.'
+            print(f'Il film \'{movie.title}\' è già noleggiato.')
+            
     def return_movie(self,movie:Movie):
         if movie in self.rented_movie:
+            movie.return_movie()
             self.rented_movie.remove(movie)
         else:
-            f"Il film {movie.title} non è stato noleggiato da questo cliente."
+            print(f"Il film \'{movie.title}\' non è stato noleggiato da questo cliente.")
+            
 class VideoRentalStore:
-    def __init__(self, movie:dict[str,Movie], customers:dict[str,Customer]) -> None:            
+    def __init__(self) -> None:            
+        self.movies = {} #Dizionario che ha per chiave l'id del film e per valore l'oggetto Movie.
+        self.customers = {} #Dizionario che ha per chiave l'id del cliente e per valore l'oggetto Customer.
         
+    def add_movie (self, movie_id:str, title:str, director:str):
+        if movie_id in self.movies:
+            print(f'Il film con ID {movie_id} esiste già.')
+        self.movies[movie_id]= Movie(movie_id=movie_id, title=title, director=director)
+        
+    def register_customer(self, customer_id:str, name:str):
+        if customer_id in self.customers:
+            print(f'Il cliente con ID {customer_id} è già registrato.')
+        self.customers[customer_id] = Customer(customer_id=customer_id, name=name)
+    
+    def rent_movie(self, customer_id:str, movie_id:str):
+        if movie_id not in self.movies or customer_id not in self.customers:
+            print('Cliente o film non trovato.')
+        else:
+            movie: Movie = self.movies[movie_id]
+            costumer: Customer = self.customers[customer_id]
+            costumer.rent_movie(movie)
+
+    def return_movie(self, customer_id:str,movie_id:str):
+        if movie_id not in self.movies or customer_id not in self.customers:
+            print('Cliente o film non trovato.')
+        else:    
+            movie: Movie = self.movies[movie_id]
+            costumer: Customer = self.customers[customer_id]
+            
+            costumer.return_movie(movie)
+
+    def get_rented_movies(self, customer_id:str)-> list[Movie]:
+        
+        if customer_id not in self.customers:
+            print("Cliente non trovato.") 
+        else:
+            customer: Customer = self.customers[customer_id]
+            return customer.rented_movie
+        
+# if __name__ == "__main__":
+#     # Creazione di un nuovo videonoleggio
+#     videonoleggio = VideoRentalStore()
+
+#     # Aggiunta di nuovi film
+#     videonoleggio.add_movie("1", "Inception", "Christopher Nolan")
+#     videonoleggio.add_movie("2", "The Matrix", "Wachowski Brothers")
+
+#     # Registrazione di nuovi clienti
+#     videonoleggio.register_customer("101", "Alice")
+#     videonoleggio.register_customer("102", "Bob")
+
+#     # Noleggio di film
+#     videonoleggio.rent_movie("101", "1")
+#     videonoleggio.rent_movie("102", "2")
+
+#     # Tentativo di noleggiare un film già noleggiato
+#     videonoleggio.rent_movie("101", "1")
+
+#     # Restituzione di film
+#     videonoleggio.return_movie("101", "1")
+
+#     # Tentativo di restituire un film non noleggiato
+#     videonoleggio.return_movie("101", "1")
+
+#     # Ottenere la lista dei film noleggiati da un cliente
+#     rented_movies_alice = videonoleggio.get_rented_movies("101")
+#     print(f"Film noleggiati da Alice: {[movie.title for movie in rented_movies_alice]}")
+
+#     rented_movies_bob = videonoleggio.get_rented_movies("102")
+#     print(f"Film noleggiati da Bob: {[movie.title for movie in rented_movies_bob]}")
+
+	
+
+#sistema bancario con i seguenti requisiti:
+class Account:
+    def __init__(self,account_id:str, balance:float) -> None:
+        self.account_id = account_id
+        self.balance = balance
+        
+    def deposit(self, amont:float):
+        self.balance += amont
+    
+    def get_balance(self)->float:
+        return self.balance
+class Bank:
+        def __init__(self, account:dict[str, Account]={}) -> None:
+            self.account = account
+            
+        def create_account(self, account_id:str):
+            if account_id not in self.account:
+                new_accunt = Account(account_id,0)
+                self.account[account_id] = Account(account_id,0)
+            else:
+                raise ValueError ('Account with this ID already exists')
+            return new_accunt
+            
+        def deposit(self, account_id:str, amount:float):
+            if account_id in self.account:
+                
+                self.account[account_id] = amount
                 
         
+        def get_balance(self, account_id:str):
+            if account_id in self.account:
+                return self.account[account_id]
+            else:
+                raise ValueError ("Account not found")
+ 	
+
+ 	
+# bank = Bank()
+# account1 = bank.create_account("123")
+# print(account1.get_balance())
+
+#gestione della biblioteca 
+class Book:
+    def __init__(self, book_id:str, title:str,author:str) -> None:
+        self.book_id = book_id
+        self.title = title
+        self.author = author
+        self.is_borrowed:bool = False
+    
+    def borrow(self):
+        self.is_borrowed = True
+    
+    def return_book(self):
+        self.is_borrowed = False
         
+class Member:
+        def __init__(self, member_id:str, name:str) -> None:
+            self.member_id = member_id
+            self.name = name
+            self.borrowed_book:list[Book] = []
+        
+        def borrow_book (self, book:Book):
+            if not book.is_borrowed:
+                self.borrowed_book.append(book)
+                book.borrow()
+        
+        def return_book(self, book:Book):
+            if book.is_borrowed:
+                self.borrowed_book.remove(book)
+                book.return_book()
+                
+class Library:
+    def __init__(self) -> None:
+        self.books:dict[str,Book] = {}
+        self.members:dict[str, Member] = {}
+        
+    def add_book (self, book_id:str, title:str, author:str):
+        self.books[book_id] = Book(book_id,title,author)
+    
+    def register_member(self, member_id:str, name:str):
+        self.members[member_id]= Member(member_id,name)
+        
+    def borrow_book(self, member_id: str, book_id: str):
+        if book_id in self.books:
+            if member_id in self.members:
+                self.members[member_id].borrow_book(book_id)
+                
+    def return_book(self, member_id:str, book_id:str):
+        if book_id in self.books:
+            if member_id in self.members:
+                self.members[member_id].return_book(book_id)
+            
+    
+    def get_borrowed_books (self, member_id:str)->list[Book]:
+        if member_id in self.members:
+            member = self.members[member_id]
+            
+            return member.borrowed_book
+            
+library = Library()
+
+library.add_book("B001", "The Great Gatsby", "F. Scott Fitzgerald")
+library.add_book("B002", "1984", "George Orwell")
+library.add_book("B003", "To Kill a Mockingbird", "Harper Lee")
+
+# Register members
+library.register_member("M001", "Alice")
+library.register_member("M002", "Bob")
+library.register_member("M003", "Charlie")
+
+# Borrow books
+library.borrow_book("M001", "B001")
+library.borrow_book("M002", "B002")
+
+print(library.get_borrowed_books("M001"))  # Expected output: ['The Great Gatsby']
+print(library.get_borrowed_books("M002"))  # Expected output: ['1984']
+                   
