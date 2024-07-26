@@ -1,14 +1,21 @@
 #Scrivi una funzione che, data una lista, ritorni un dictionary che mappa ogni elemento alla sua frequenza nella lista.
 from collections import Counter
 def frequency_dict(elements: list) -> dict:
-    f:list = Counter(elements)
-    dic:dict={}
-    for i in f:
-        dic[i] = f[i]    
+    # f:list = Counter(elements)
+    # dic:dict={}
+    # for i in f:
+    #     dic[i] = f[i]    
+    # return dic
+    dic:dict = {}
+    for i in elements:
+        if i in dic: 
+            dic[i] +=1
+        else:
+            dic[i] = 1
     return dic
     
     
-#print(frequency_dict(['mela', 'banana', 'mela']))
+print(frequency_dict(['mela', 'banana', 'mela']))
 
 #Scrivere il frammento di codice che cambi il valore intero memorizzato nella variabile x nel seguente modo:
 # - se x è pari, deve essere diviso per 2;
@@ -176,6 +183,7 @@ class RecipeManager:
         else:
             return (f'esiste la ricetta:{recipe_name=}')
         return {recipe_name: self.elenco_ricette[recipe_name]}
+    
     def remove_ingredient(self,recipe_name:str, ingredient:str)->dict:
         if recipe_name not in self.elenco_ricette:
             return {'error': f'La ricetta "{recipe_name}" non esiste.'}
@@ -363,103 +371,148 @@ class VideoRentalStore:
 
 #sistema bancario con i seguenti requisiti:
 class Account:
-    def __init__(self,account_id:str, balance:float) -> None:
+    def __init__(self,account_id:str,balance= 0)-> None:
         self.account_id = account_id
         self.balance = balance
         
-    def deposit(self, amont:float):
-        self.balance += amont
+    def deposit(self, amount:float):
+        self.balance += amount
     
-    def get_balance(self)->float:
+    def get_balance(self):
         return self.balance
+
 class Bank:
-        def __init__(self, account:dict[str, Account]={}) -> None:
-            self.account = account
-            
-        def create_account(self, account_id:str):
-            if account_id not in self.account:
-                new_accunt = Account(account_id,0)
-                self.account[account_id] = Account(account_id,0)
-            else:
-                raise ValueError ('Account with this ID already exists')
-            return new_accunt
-            
-        def deposit(self, account_id:str, amount:float):
-            if account_id in self.account:
-                
-                self.account[account_id] = amount
-                
+    def __init__(self) -> None:
+         self.accounts: dict[str, Account] = {}
         
-        def get_balance(self, account_id:str):
-            if account_id in self.account:
-                return self.account[account_id]
-            else:
-                raise ValueError ("Account not found")
- 	
+    def create_account(self, account_id):
+        if account_id in self.accounts:
+            raise ValueError( "Account with this ID already exists")
+        else:
+            account= Account(account_id)
+            self.accounts[account_id] = account
+            return account
+    
+    def deposit(self,account_id,amount):
+        if account_id in self.accounts:
+             self.accounts[account_id].deposit(amount)
+        else:
+             return "Id error"
+
+    def get_balance(self,account_id):
+        if account_id in self.accounts:
+            return self.accounts[account_id].get_balance()
+        else:
+             raise ValueError("Account not found")
 
  	
-# bank = Bank()
-# account1 = bank.create_account("123")
-# print(account1.get_balance())
+bank = Bank()
+account1 = bank.create_account("123")
+print(account1.get_balance())
+
+bank = Bank()
+account1 = bank.create_account("123")
+bank.deposit("123",100)
+print(bank.get_balance("123"))
+bank = Bank()
+account2 = bank.create_account("456")
+bank.deposit("456",200)
+print(bank.get_balance("456"))
+
+bank = Bank()
+account1 = bank.create_account("123")
+try:
+    bank.create_account("123")
+except ValueError as e:
+    print(e)
+bank = Bank()
+try:
+    bank.get_balance("456")
+except ValueError as e:
+    print(e)
 
 #gestione della biblioteca 
+class Member:
+    
+    def __init__(self, member_id: str, name: str):
+        self.member_id: str = member_id
+        self.name: str = name
+        self.borrowed_books: list[Book] = []
+        
+    def __str__(self):
+        return f"{self.member_id}, {self.name}, {self.borrowed_books}"
+    
+    def borrow_book(self, book):
+        if book.is_borrowed == False:
+            self.borrowed_books.append(book)
+    
+    def return_book(self, book):
+        self.borrowed.books.remove(book)
+
 class Book:
-    def __init__(self, book_id:str, title:str,author:str) -> None:
-        self.book_id = book_id
-        self.title = title
-        self.author = author
-        self.is_borrowed:bool = False
     
+    def __init__(self, book_id: str, title: str, author: str):
+        self.book_id: str = book_id
+        self.title: str = title
+        self.author: str = author
+        self.is_borrowed: bool = False
+        
+    def __str__(self):
+        return f"{self.book_id}, {self.title}, {self.author}, {self.is_borrowed}"
+        
     def borrow(self):
-        self.is_borrowed = True
-    
+        if self.is_borrowed != True:
+            self.is_borrowed = True
+        
     def return_book(self):
         self.is_borrowed = False
-        
-class Member:
-        def __init__(self, member_id:str, name:str) -> None:
-            self.member_id = member_id
-            self.name = name
-            self.borrowed_book:list[Book] = []
-        
-        def borrow_book (self, book:Book):
-            if not book.is_borrowed:
-                self.borrowed_book.append(book)
-                book.borrow()
-        
-        def return_book(self, book:Book):
-            if book.is_borrowed:
-                self.borrowed_book.remove(book)
-                book.return_book()
-                
+
 class Library:
-    def __init__(self) -> None:
-        self.books:dict[str,Book] = {}
-        self.members:dict[str, Member] = {}
-        
-    def add_book (self, book_id:str, title:str, author:str):
-        self.books[book_id] = Book(book_id,title,author)
     
-    def register_member(self, member_id:str, name:str):
-        self.members[member_id]= Member(member_id,name)
+    def __init__(self):
+        self.books: dict[str, Book] = {}
+        self.members: dict[str, Member] = {}
+        
+    def add_book(self, book_id: str, title: str, author: str):
+        book = Book(book_id, title, author)
+        self.books.update({book_id: book})
+        
+    def register_member(self, member_id: str, name: str):
+        member = Member(member_id, name)
+        self.members.update({member_id: member})
         
     def borrow_book(self, member_id: str, book_id: str):
-        if book_id in self.books:
-            if member_id in self.members:
-                self.members[member_id].borrow_book(book_id)
-                
-    def return_book(self, member_id:str, book_id:str):
-        if book_id in self.books:
-            if member_id in self.members:
-                self.members[member_id].return_book(book_id)
-            
-    
-    def get_borrowed_books (self, member_id:str)->list[Book]:
         if member_id in self.members:
-            member = self.members[member_id]
+            member = self.members.get(member_id)
+        else: 
+            raise ValueError("Member not found")
+        if book_id in self.books:
+            book = self.books.get(book_id)
+        else:
+            raise ValueError("Book not found")
+        if book.is_borrowed == False:
+            member.borrowed_books.append(book.title)
+            book.is_borrowed = book.borrow()
+        else:
+            raise ValueError("Book is already borrowed")
+    
+    def return_book(self, member_id: str, book_id: str):
+        member = self.members.get(member_id)
+        book = self.books.get(book_id)
+        if book.title in member.borrowed_books:
+            member.borrowed_books.remove(book.title)
+            book.is_borrowed = False
+        else:
+            raise ValueError("Book not borrowed by this member")
             
-            return member.borrowed_book
-            
+    def get_borrowed_books(self, member_id):
+        if member_id in self.members:
+            member = self.members.get(member_id)
+            return member.borrowed_books
+        else:
+            raise ValueError("Member not found")
+        
+
 library = Library()
 
 library.add_book("B001", "The Great Gatsby", "F. Scott Fitzgerald")
