@@ -81,24 +81,28 @@ def sum_above_threshold(numbers: list[int], n:int) -> int:
 def print_seq(): 
     
     print("Sequenza a):")
+    a=range(1,8)
     for i in a:
         print(i)
 
     print("Sequenza b):")
+    b=range(3,24,5)
     for i in b:
         print(i)
 
     print("Sequenza c):")
+    c= range(20,-11,-6)
     for i in c:
-        print(c)
+        print(i)
 
     print("Sequenza d):")
+    d = range(19,52,8)
     for i in d:
-        print(d)
+        print(i)
     
     return
 
-# print_seq()
+print_seq()
 #Scrivi una funzione che accetti un
 # dizionario di prodotti con i prezzi e restituisca un nuovo dizionario con solo i prodotti che hanno un prezzo superiore a 20, scontati del 10%
 def filtra_e_mappa(prodotti: dict[str:float]) -> dict[str:float]:
